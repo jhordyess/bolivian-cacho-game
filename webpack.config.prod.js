@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CnameWebpackPlugin = require("cname-webpack-plugin");
 
 module.exports = {
-  entry: path.join(__dirname, "src", "index.tsx"),
+  entry: path.join(__dirname, "src", "index.jsx"),
   mode: "production",
   output: {
     path: path.resolve(__dirname, "dist"),
