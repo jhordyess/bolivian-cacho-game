@@ -1,16 +1,13 @@
 import React from "react";
 import {
-  Escalera,
+  Text,
   Quinas,
   Cuadras,
-  Full,
-  Grande,
   Balas,
-  Poker,
   Senas,
   Trenes,
   Tontos,
-} from "./Icons";
+} from "@components/Icons";
 const classes = {
   icon: "w-6 absolute top-0 left-0",
   td: "w-14 h-14 px-4 py-3 relative hover:bg-gray-100 cursor-pointer",
@@ -26,7 +23,7 @@ const tableData = [
     },
     {
       name: "escalera",
-      icon: <Escalera />,
+      icon: <Text txt="E" />,
       tdClassName: "border-b",
       title: "Escalera / Straight",
     },
@@ -46,7 +43,7 @@ const tableData = [
     },
     {
       name: "full",
-      icon: <Full />,
+      icon: <Text txt="F" />,
       tdClassName: "",
       title: "Full / Full House",
     },
@@ -66,7 +63,7 @@ const tableData = [
     },
     {
       name: "poker",
-      icon: <Poker />,
+      icon: <Text txt="P" />,
       tdClassName: "border-t",
       title: "Poker / Four of a kind",
     },
@@ -81,7 +78,7 @@ const tableData = [
     null,
     {
       name: "grande",
-      icon: <Grande />,
+      icon: <Text txt="G" />,
       tdClassName: "border-r border-t border-l",
       title: "Grande / Five of a kind",
     },
