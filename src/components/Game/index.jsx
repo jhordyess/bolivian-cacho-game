@@ -14,7 +14,7 @@ import {
 
 const classes = {
   icon: "w-6 absolute top-0 left-0",
-  td: "w-14 h-14 px-4 py-3 border-gray-400 relative hover:bg-gray-100 cursor-pointer",
+  td: "w-14 h-14 px-4 py-3 relative hover:bg-gray-100 cursor-pointer",
 };
 
 const tableData = [
@@ -92,45 +92,69 @@ const tableData = [
 
 export default function Game({ onClose }) {
   return (
-    <div className="fixed inset-0 grid grid-cols-3 items-center justify-center bg-white w-full gap-4 px-12">
-      <div className="col-span-2 p-4 border">
-        <Board />
-      </div>
-      <div className="col-span-1 flex flex-col gap-8">
-        <ScoreChart />
-        <Actions onClose={onClose} />
+    <div className="container fixed inset-0 flex items-center justify-center bg-white w-full gap-4 px-12">
+      <div className="flex flex-row">
+        <Board player1="" player2="" />
+        <RightPanel />
       </div>
     </div>
   );
 }
 
-const Actions = ({ onClose }) => (
-  <div className="p-4 flex flex-row border gap-4">
-    <button>
-      <span className="text-2xl">🎲</span>
-      <span className="ml-2">Roll dices</span>
-    </button>
-    <button onClick={onClose}>
-      <span className="text-2xl">❌</span>
-      <span className="ml-2">Exit</span>
-    </button>
+const Board = ({ player1, player2 }) => (
+  <div className="flex flex-col mx-auto gap-6 border py-6 w-72">
+    <Player name="Player 2" />
+    <Dices />
+    <Player name="Player 1" />
   </div>
 );
 
-const ScoreChart = () => (
-  <div className="p-4 flex flex-col border">
-    <h2>Score Chart</h2>
-    <div className="flex justify-between">
-      <ScoreChartPlayer name="player 1" />
-      <ScoreChartPlayer name="player 2" />
+const Player = ({ name = "" }) => (
+  <div className="flex flex-row gap-6 justify-between items-center">
+    <ScoreChart name={name} />
+  </div>
+);
+
+const Dices = ({ name }) => (
+  <div className="w-full flex flex-row gap-3 border-t border-b p-4">
+    <div className="w-10 h-10 bg-gray-400 rounded-md"></div>
+    <div className="w-10 h-10 bg-gray-400 rounded-md"></div>
+    <div className="w-10 h-10 bg-gray-400 rounded-md"></div>
+    <div className="w-10 h-10 bg-gray-400 rounded-md"></div>
+    <div className="w-10 h-10 bg-gray-400 rounded-md"></div>
+  </div>
+);
+
+const RightPanel = ({ name = "" }) => (
+  <div className="border-r border-y flex flex-col justify-between gap-6 py-6 w-40">
+    <div className="flex flex-col gap-4 px-6 w-full">
+      <p className="text-justify">
+        Aute dolore velit magna ipsum duis anim magna consectetur non. Laboris
+      </p>
+    </div>
+    <div className="flex flex-col gap-4 px-6 w-full">
+      <button
+        class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-md"
+        title="Roll dices / End turn"
+      >
+        START
+      </button>
+      <button
+        class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-md"
+        title="Roll dices / End turn"
+      >
+        ROLL
+      </button>
+      <button className="bg-red-200 hover:bg-red-400 text-white font-bold py-2 px-6 rounded-md">
+        Exit
+      </button>
     </div>
   </div>
 );
 
-const ScoreChartPlayer = ({ name = "" }) => (
-  <div className="w-64 mx-auto">
-    <h3>{name}</h3>
-    <table className="border-collapse mx-auto">
+const ScoreChart = ({ name = "" }) => (
+  <div className="w-full">
+    <table className="border-collapse mx-auto border">
       <tbody>
         {tableData.map((row, i) => (
           <tr key={i}>
@@ -154,29 +178,4 @@ const ScoreChartPlayer = ({ name = "" }) => (
       </tbody>
     </table>
   </div>
-);
-
-const Board = () => (
-  <div className="w-64 mx-auto">
-    <Player name="Player 2" />
-    <DicesArea />
-    <Player name="Player 1" />
-  </div>
-);
-
-const Player = ({ name = "" }) => (
-  <div className="flex flex-col gap-4 justify-between items-center">
-    <h3>{name}</h3>
-    <div className="flex items-center">
-      <div className="w-12 h-12 bg-gray-400 rounded-md mr-2"></div>
-      <div className="w-12 h-12 bg-gray-400 rounded-md mr-2"></div>
-      <div className="w-12 h-12 bg-gray-400 rounded-md mr-2"></div>
-      <div className="w-12 h-12 bg-gray-400 rounded-md mr-2"></div>
-      <div className="w-12 h-12 bg-gray-400 rounded-md mr-2"></div>
-    </div>
-  </div>
-);
-
-const DicesArea = () => (
-  <div className="flex justify-between items-center h-64"></div>
 );
