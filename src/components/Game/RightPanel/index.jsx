@@ -1,6 +1,6 @@
 import React from "react";
 
-const RightPanel = ({ onClose }) => (
+const RightPanel = ({ onClose, roll }) => (
   <div className="border-r border-y flex flex-col justify-between gap-6 py-6 w-40">
     <div className="flex flex-col gap-4 px-6 w-full">
       <p className="text-justify">
@@ -17,6 +17,7 @@ const RightPanel = ({ onClose }) => (
       <button
         class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-md"
         title="Roll dices / End turn"
+        onClick={roll}
       >
         ROLL
       </button>

@@ -8,6 +8,7 @@ import {
   Trenes,
   Tontos,
 } from "@components/Icons";
+
 const classes = {
   icon: "w-6 absolute top-0 left-0",
   td: "w-14 h-14 px-4 py-3 relative hover:bg-gray-100 cursor-pointer",
