@@ -1,8 +1,8 @@
-import Game from "@components/Game";
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Description from "./Main/Description";
+import Game from "./Main/Game";
 import Main from "./Main";
 
 export default function Home() {

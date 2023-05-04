@@ -1,6 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import GameMain from "@components/Game.jsx";
+import GameMain from "@components/Game/index.jsx";
 
 export default function Game() {
   const [openGame, setOpenGame] = React.useState(false);
@@ -8,6 +8,11 @@ export default function Game() {
   const handleOpenGame = () => {
     setOpenGame(true);
   };
+
+  const handleCloseGame = () => {
+    setOpenGame(false);
+  };
+
   return (
     <div className="text-center">
       <button
@@ -16,7 +21,11 @@ export default function Game() {
       >
         Play now
       </button>
-      {openGame && createPortal(<GameMain />, document.getElementById("modal"))}
+      {openGame &&
+        createPortal(
+          <GameMain onClose={handleCloseGame} />,
+          document.getElementById("modal")
+        )}
     </div>
   );
 }
