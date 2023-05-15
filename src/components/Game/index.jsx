@@ -19,14 +19,16 @@ export default function Game({ onClose }) {
   };
 
   return (
-    <div className="container fixed inset-0 flex items-center justify-center bg-white w-full gap-4 px-12">
-      <div className="flex flex-row">
-        <Board player1="" player2="">
-          <ScoreChart name="Player 2" />
-          <Dices dices={dices} />
-          <ScoreChart name="Player 1" />
-        </Board>
-        <RightPanel onClose={onClose} roll={roll} />
+    <div className="max-h-screen min-w-full overflow-y-auto">
+      <div className="fixed inset-0 flex items-center justify-center bg-white gap-4 px-12">
+        <div className="flex flex-row">
+          <Board player1="" player2="">
+            <ScoreChart name="Player 2" />
+            <Dices dices={dices} />
+            <ScoreChart name="Player 1" />
+          </Board>
+          <RightPanel onClose={onClose} roll={roll} />
+        </div>
       </div>
     </div>
   );

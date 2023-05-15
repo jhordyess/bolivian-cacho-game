@@ -9,13 +9,13 @@ const RightPanel = ({ onClose, roll }) => (
     </div>
     <div className="flex flex-col gap-4 px-6 w-full">
       <button
-        class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-md"
+        className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-md"
         title="Roll dices / End turn"
       >
         START
       </button>
       <button
-        class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-md"
+        className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-md"
         title="Roll dices / End turn"
         onClick={roll}
       >

@@ -10,68 +10,70 @@ import {
 } from "@components/Icons";
 
 const classes = {
-  icon: "w-6 absolute top-0 left-0",
-  td: "w-14 h-14 px-4 py-3 relative hover:bg-gray-100 cursor-pointer",
+  icon: "w-6 absolute top-0 left-0 m-0 border rounded-md",
+  td: "w-14 h-14 px-4 py-3 relative cursor-pointer border border-gray-400 hover:bg-gray-100 rounded-md",
 };
+
+const color = "#9CA3AF";
 
 const tableData = [
   [
     {
       name: "balas",
-      icon: <Balas />,
-      tdClassName: "border-r border-b",
+      icon: <Balas color={color} />,
+      tdClassName: "",
       title: "Balas",
     },
     {
       name: "escalera",
-      icon: <Text txt="E" />,
-      tdClassName: "border-b",
+      icon: <Text txt="E" color={color} />,
+      tdClassName: "",
       title: "Escalera / Straight",
     },
     {
       name: "cuadras",
-      icon: <Cuadras />,
-      tdClassName: "border-l border-b",
+      icon: <Cuadras color={color} />,
+      tdClassName: "",
       title: "Cuadras",
     },
   ],
   [
     {
       name: "tontos",
-      icon: <Tontos />,
-      tdClassName: "border-r",
+      icon: <Tontos color={color} />,
+      tdClassName: "",
       title: "Tontos",
     },
     {
       name: "full",
-      icon: <Text txt="F" />,
+      icon: <Text txt="F" color={color} />,
       tdClassName: "",
       title: "Full / Full House",
     },
     {
       name: "quinas",
-      icon: <Quinas />,
-      tdClassName: "border-l",
+      icon: <Quinas color={color} />,
+      tdClassName: "",
       title: "Quinas",
     },
   ],
   [
     {
       name: "trenes",
-      icon: <Trenes />,
-      tdClassName: "border-r border-t border-b",
+      icon: <Trenes color={color} />,
+      tdClassName: "",
       title: "Trenes",
     },
     {
       name: "poker",
-      icon: <Text txt="P" />,
-      tdClassName: "border-t",
+      icon: <Text txt="P" color={color} />,
+      tdClassName: "",
       title: "Poker / Four of a kind",
     },
     {
       name: "senas",
-      icon: <Senas />,
-      tdClassName: "border-l border-t border-b",
+      icon: <Senas color={color} />,
+      tdClassName: "",
       title: "Senas",
     },
   ],
@@ -79,8 +81,8 @@ const tableData = [
     null,
     {
       name: "grande",
-      icon: <Text txt="G" />,
-      tdClassName: "border-r border-t border-l",
+      icon: <Text txt="G" color={color} />,
+      tdClassName: "",
       title: "Grande / Five of a kind",
     },
     null,
@@ -89,7 +91,7 @@ const tableData = [
 
 const ScoreChart = ({}) => (
   <div className="w-full">
-    <table className="border-collapse mx-auto border">
+    <table className="mx-auto border-spacing-2 border-separate">
       <tbody>
         {tableData.map((row, i) => (
           <tr key={i}>

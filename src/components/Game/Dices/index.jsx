@@ -30,19 +30,19 @@ function getDice(dice) {
 const Dices = ({ dices }) => {
   return (
     <div className="w-full flex flex-row gap-3 border-t border-b p-4">
-      <div className="w-10 h-10 bg-gray-400 rounded-md">
+      <div className="w-10 h-10 bg-gray-400 rounded-md p-0">
         {getDice(dices[0])}
       </div>
-      <div className="w-10 h-10 bg-gray-400 rounded-md">
+      <div className="w-10 h-10 bg-gray-400 rounded-md p-0">
         {getDice(dices[1])}
       </div>
-      <div className="w-10 h-10 bg-gray-400 rounded-md">
+      <div className="w-10 h-10 bg-gray-400 rounded-md p-0">
         {getDice(dices[2])}
       </div>
-      <div className="w-10 h-10 bg-gray-400 rounded-md">
+      <div className="w-10 h-10 bg-gray-400 rounded-md p-0">
         {getDice(dices[3])}
       </div>
-      <div className="w-10 h-10 bg-gray-400 rounded-md">
+      <div className="w-10 h-10 bg-gray-400 rounded-md p-0">
         {getDice(dices[4])}
       </div>
     </div>

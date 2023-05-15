@@ -7,6 +7,10 @@ A react project for playing the Bolivian dice game Cacho (aka Cacho Alalay, Poke
 ### Rules
 
 Basic reference: <https://en.wikipedia.org/wiki/Cacho_Alalay>.
+https://www.youtube.com/watch?v=HDF89Vz7Ik8
+https://image.winudf.com/v2/image/Y29tLnlhaHR6ZWUub25saW5lX3NjcmVlbl83XzE1Mjg0NzE1MjZfMDEx/screen-7.jpg?fakeurl=1&type=.jpg
+https://www.pdffiller.com/preview/100/315/100315740/large.png
+https://i1.silvergames.com/screenshots/yahtzee-online/3_gameplay.jpg
 
 ### Technologies Used
 
