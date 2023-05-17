@@ -1,5 +1,5 @@
 import React from "react";
-const classNameOnRolling = "hover: cursor-not-allowed";
+const classNameOnRolling = "hover:bg-gray-200 bg-gray-200 cursor-not-allowed";
 
 const RightPanel = ({ onClose, roll, rolling }) => {
   return (
