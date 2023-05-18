@@ -27,26 +27,25 @@ function getDice(dice) {
   }
 }
 
-const Dices = ({ dices }) => {
+const Dice = ({ number, handleAlternative, invertible }) => {
   return (
-    <div className="w-full flex flex-row gap-3 border-t border-b p-4">
-      <div className="w-10 h-10 bg-gray-300 rounded-md p-0">
-        {getDice(dices[0])}
-      </div>
-      <div className="w-10 h-10 bg-gray-300 rounded-md p-0">
-        {getDice(dices[1])}
-      </div>
-      <div className="w-10 h-10 bg-gray-300 rounded-md p-0">
-        {getDice(dices[2])}
-      </div>
-      <div className="w-10 h-10 bg-gray-300 rounded-md p-0">
-        {getDice(dices[3])}
-      </div>
-      <div className="w-10 h-10 bg-gray-300 rounded-md p-0">
-        {getDice(dices[4])}
-      </div>
+    <div
+      className={`w-10 h-10 cursor-pointer  rounded-md p-0 ${
+        invertible ? "bg-blue-200" : "bg-gray-300"
+      }`}
+      onClick={handleAlternative}
+    >
+      {getDice(number)}
     </div>
   );
 };
 
-export default Dices;
+const Dices = ({ children }) => {
+  return (
+    <div className="w-full flex flex-row gap-3 border-t border-b p-4">
+      {children}
+    </div>
+  );
+};
+
+export { Dices, Dice };
