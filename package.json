@@ -23,8 +23,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@xstate/react": "^3.2.2",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "xstate": "^4.37.2"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

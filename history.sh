@@ -19,3 +19,4 @@ npm i -D gh-pages cname-webpack-plugin
 
 # Extra commands
 npm i -D tailwindcss postcss-loader autoprefixer
+npm i lodash xstate @xstate/react
