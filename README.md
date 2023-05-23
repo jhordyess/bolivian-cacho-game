@@ -2,6 +2,10 @@
 
 A react project for playing the Bolivian dice game Cacho (aka Cacho Alalay, Poker of Dice)
 
+## Project Status
+
+🚧 This project is under construction 🚧
+
 ## Description
 
 ### Rules
