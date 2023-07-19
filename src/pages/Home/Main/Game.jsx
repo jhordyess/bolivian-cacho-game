@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import GameMain from '@components/Game/index.jsx'
 
 export default function Game() {
-  const [openGame, setOpenGame] = React.useState(true)
+  const [openGame, setOpenGame] = React.useState(false)
 
   const handleOpenGame = () => {
     setOpenGame(true)
