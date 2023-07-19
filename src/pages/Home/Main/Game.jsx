@@ -1,31 +1,28 @@
-import React from "react";
-import { createPortal } from "react-dom";
-import GameMain from "@components/Game/index.jsx";
+import React from 'react'
+import { createPortal } from 'react-dom'
+import GameMain from '@components/Game/index.jsx'
 
 export default function Game() {
-  const [openGame, setOpenGame] = React.useState(true);
+  const [openGame, setOpenGame] = React.useState(true)
 
   const handleOpenGame = () => {
-    setOpenGame(true);
-  };
+    setOpenGame(true)
+  }
 
   const handleCloseGame = () => {
-    setOpenGame(false);
-  };
+    setOpenGame(false)
+  }
 
   return (
     <div className="text-center">
       <button
-        className="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 mb-6"
+        className="mb-6 inline-block rounded-md bg-indigo-500 px-4 py-2 text-white hover:bg-indigo-600"
         onClick={handleOpenGame}
       >
         Play now
       </button>
       {openGame &&
-        createPortal(
-          <GameMain onClose={handleCloseGame} />,
-          document.getElementById("modal")
-        )}
+        createPortal(<GameMain onClose={handleCloseGame} />, document.getElementById('modal'))}
     </div>
-  );
+  )
 }

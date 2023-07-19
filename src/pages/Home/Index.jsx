@@ -1,21 +1,18 @@
-import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Description from "./Main/Description";
-import Game from "./Main/Game";
-import Main from "./Main";
+import React from 'react'
+import Header from './Header'
+import Footer from './Footer'
+import Description from './Main/Description'
+import Game from './Main/Game'
+import Main from './Main'
 
 export default function Home() {
   return (
-    <div className="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
       <Header>
-        <h1 className="text-3xl font-bold text-gray-900 text-center mb-6">
-          Bolivian Cacho Game
-        </h1>
+        <h1 className="mb-6 text-center text-3xl font-bold text-gray-900">Bolivian Cacho Game</h1>
 
-        <p className="text-gray-600 text-center mb-6">
-          A React project for playing the Bolivian dice game Cacho aka Cacho
-          Alalay, Poker of dices.
+        <p className="mb-6 text-center text-gray-600">
+          A React project for playing the Bolivian dice game Cacho aka Cacho Alalay, Poker of dices.
         </p>
       </Header>
 
@@ -24,22 +21,19 @@ export default function Home() {
 
         <Description>
           <div className="px-4 py-6 sm:px-0">
-            <h2 className="text-lg font-medium text-gray-900">
-              What is Cacho?
-            </h2>
+            <h2 className="text-lg font-medium text-gray-900">What is Cacho?</h2>
             <p className="mt-1 text-gray-600">
-              Cacho is a popular dice game from Bolivia that is played with five
-              dice and a cup. The objective of the game is to get the highest
-              possible score.
+              Cacho is a popular dice game from Bolivia that is played with five dice and a cup. The
+              objective of the game is to get the highest possible score.
             </p>
           </div>
 
           <div className="px-4 py-6 sm:px-0">
             <h2 className="text-lg font-medium text-gray-900">How to play?</h2>
             <p className="mt-1 text-gray-600">
-              Each player rolls the dice and can keep some or all of the dice
-              and roll the remaining ones two more times. At the end, the score
-              obtained by each player is compared to determine the winner.
+              Each player rolls the dice and can keep some or all of the dice and roll the remaining
+              ones two more times. At the end, the score obtained by each player is compared to
+              determine the winner.
             </p>
           </div>
         </Description>
@@ -66,5 +60,5 @@ export default function Home() {
         </a>
       </Footer>
     </div>
-  );
+  )
 }

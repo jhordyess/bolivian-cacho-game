@@ -1,97 +1,97 @@
-import { useMachine as useMachineHook } from "@xstate/react";
-import { createMachine } from "xstate";
+import { useMachine as useMachineHook } from '@xstate/react'
+import { createMachine } from 'xstate'
 
 const stateMachine = createMachine({
-  id: "stateMachine",
-  initial: "lobby",
+  id: 'stateMachine',
+  initial: 'lobby',
   states: {
     lobby: {
       on: {
-        START_GAME: "playing",
-      },
+        START_GAME: 'playing'
+      }
     },
     playing: {
       on: {
-        IS_PLAYER_TURN: "player.turn",
-        IS_BOT_TURN: "bot.turn",
-        GAME_OVER: "gameOver",
-        CANCEL: "lobby",
-      },
+        IS_PLAYER_TURN: 'player.turn',
+        IS_BOT_TURN: 'bot.turn',
+        GAME_OVER: 'gameOver',
+        CANCEL: 'lobby'
+      }
     },
     gameOver: {
       on: {
-        RESTART_GAME: "lobby",
-      },
+        RESTART_GAME: 'lobby'
+      }
     },
     player: {
-      initial: "turn",
+      initial: 'turn',
       states: {
         turn: {
           on: {
-            ROLL: "roll",
-            CANCEL: "#stateMachine.lobby",
-          },
+            ROLL: 'roll',
+            CANCEL: '#stateMachine.lobby'
+          }
         },
         roll: {
           on: {
-            DICES_CHOICE: "dicesChoice",
-            HAND_CHOICE: "handChoice",
-            SURRENDER: "#stateMachine.playing",
-            CANCEL: "#stateMachine.lobby",
-          },
+            DICES_CHOICE: 'dicesChoice',
+            HAND_CHOICE: 'handChoice',
+            SURRENDER: '#stateMachine.playing',
+            CANCEL: '#stateMachine.lobby'
+          }
         },
         dicesChoice: {
           on: {
-            HAND_CHOICE: "handChoice",
-            SURRENDER: "#stateMachine.playing",
-            CANCEL: "#stateMachine.lobby",
-          },
+            HAND_CHOICE: 'handChoice',
+            SURRENDER: '#stateMachine.playing',
+            CANCEL: '#stateMachine.lobby'
+          }
         },
         handChoice: {
           on: {
-            END_TURN: "#stateMachine.playing",
-            SURRENDER: "#stateMachine.playing",
-            CANCEL: "#stateMachine.lobby",
-          },
-        },
-      },
+            END_TURN: '#stateMachine.playing',
+            SURRENDER: '#stateMachine.playing',
+            CANCEL: '#stateMachine.lobby'
+          }
+        }
+      }
     },
     bot: {
-      initial: "turn",
+      initial: 'turn',
       states: {
         turn: {
           on: {
-            ROLL: "roll",
-            CANCEL: "#stateMachine.lobby",
-          },
+            ROLL: 'roll',
+            CANCEL: '#stateMachine.lobby'
+          }
         },
         roll: {
           on: {
-            DICES_CHOICE: "dicesChoice",
-            HAND_CHOICE: "handChoice",
-            SURRENDER: "#stateMachine.playing",
-            CANCEL: "#stateMachine.lobby",
-          },
+            DICES_CHOICE: 'dicesChoice',
+            HAND_CHOICE: 'handChoice',
+            SURRENDER: '#stateMachine.playing',
+            CANCEL: '#stateMachine.lobby'
+          }
         },
         dicesChoice: {
           on: {
-            HAND_CHOICE: "handChoice",
-            SURRENDER: "#stateMachine.playing",
-            CANCEL: "#stateMachine.lobby",
-          },
+            HAND_CHOICE: 'handChoice',
+            SURRENDER: '#stateMachine.playing',
+            CANCEL: '#stateMachine.lobby'
+          }
         },
         handChoice: {
           on: {
-            END_TURN: "#stateMachine.playing",
-            SURRENDER: "#stateMachine.playing",
-            CANCEL: "#stateMachine.lobby",
-          },
-        },
-      },
-    },
-  },
-});
+            END_TURN: '#stateMachine.playing',
+            SURRENDER: '#stateMachine.playing',
+            CANCEL: '#stateMachine.lobby'
+          }
+        }
+      }
+    }
+  }
+})
 
-const useMachine = () => useMachineHook(stateMachine);
+const useMachine = () => useMachineHook(stateMachine)
 
-export { useMachine };
+export { useMachine }
