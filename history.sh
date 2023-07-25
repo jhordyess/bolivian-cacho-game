@@ -21,3 +21,4 @@ npm i -D gh-pages cname-webpack-plugin
 npm i -D tailwindcss postcss-loader autoprefixer
 npm i lodash xstate @xstate/react
 npm i -D prettier prettier-plugin-tailwindcss
+npm i -D eslint && npx eslint --init
