@@ -1,48 +1,48 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: path.join(__dirname, "src", "index.jsx"),
-  mode: "development",
+  entry: path.join(__dirname, 'src', 'index.jsx'),
+  mode: 'development',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
     alias: {
-      "@components": path.resolve(__dirname, "src", "components"),
-      "@pages": path.resolve(__dirname, "src", "pages"),
-    },
+      '@components': path.resolve(__dirname, 'src', 'components'),
+      '@pages': path.resolve(__dirname, 'src', 'pages')
+    }
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: ['babel-loader']
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
-      },
-    ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "public", "index.html"),
-      filename: "index.html",
+      template: path.join(__dirname, 'public', 'index.html'),
+      filename: 'index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-    }),
+      filename: '[name].css'
+    })
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"),
+      directory: path.join(__dirname, 'dist')
     },
-    watchFiles: path.join(__dirname, "src", "**"),
-    port: 3640,
-  },
-};
+    watchFiles: path.join(__dirname, 'src', '**'),
+    port: 3640
+  }
+}
