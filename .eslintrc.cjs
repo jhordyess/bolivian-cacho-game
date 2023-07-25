@@ -4,16 +4,12 @@ module.exports = {
     es2021: true
   },
   extends: ['eslint:recommended', 'plugin:react/recommended'],
-  overrides: [
-    {
-      env: {
-        node: true
-      },
-      files: ['.eslintrc.{js,cjs}'],
-      parserOptions: {
-        sourceType: 'script'
-      }
-    }
+  ignorePatterns: [
+    'dist',
+    '.eslintrc.cjs',
+    'postcss.config.js',
+    'tailwind.config.js',
+    'webpack.config.*.js'
   ],
   parserOptions: {
     ecmaVersion: 'latest',
