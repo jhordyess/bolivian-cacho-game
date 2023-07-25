@@ -81,7 +81,7 @@ const tableData = [
   ]
 ]
 
-const ScoreChart = ({}) => (
+const ScoreChart = () => (
   <div className="w-full">
     <table className="mx-auto border-separate border-spacing-2">
       <tbody>

@@ -2,7 +2,6 @@ import React from 'react'
 import ScoreChart from './ScoreChart'
 import { Dices, Dice } from './Dices'
 import RightPanel from './RightPanel'
-import { useMachine } from '../../machine/state'
 
 function invertDiceNumber(dice) {
   switch (dice) {
@@ -76,8 +75,6 @@ export default function Game({ onClose }) {
     }
     setDices(newDices)
   }
-
-  const formatDices = dices.map(({ value }) => value)
 
   let animation
   const roll = () => {
