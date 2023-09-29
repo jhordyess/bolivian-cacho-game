@@ -1,15 +1,16 @@
 {
   "name": "bolivian-cacho-game",
   "description": "React project for playing the Bolivian dice game Cacho",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "author": "Jhordy Gavinchu <dev@jhordyess.com>",
+  "license": "MIT",
+  "private": true,
   "keywords": [
     "React",
     "Bolivia",
     "Dice-game",
     "Cacho"
   ],
-  "author": "Jhordy Gavinchu <dev@jhordyess.com>",
-  "license": "MIT",
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -19,10 +20,12 @@
   "scripts": {
     "dev": "webpack serve --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
-    "lint": "eslint . --ext .js,.jsx",
     "start": "npm run build && serve -s dist -l 3000",
+    "lint": "eslint . --ext .js,.jsx",
+    "format": "prettier --write .",
     "predeploy": "npm run lint && npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@xstate/react": "^3.2.2",
@@ -42,9 +45,10 @@
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^5.0.0",
     "eslint": "^8.45.0",
-    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react": "^7.33.2",
     "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.1",
+    "husky": "^8.0.3",
     "mini-css-extract-plugin": "^2.7.5",
     "postcss-loader": "^7.2.4",
     "prettier": "^3.0.0",
