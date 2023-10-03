@@ -50,13 +50,14 @@ export default function Home() {
           Jhordyess
         </a>
         <br />
+        👉&nbsp;
         <a
           href="https://github.com/jhordyess/bolivian-cacho-game"
           target="_blank"
           rel="noreferrer"
           className="text-blue-600 hover:text-blue-400"
         >
-          👉 View on GitHub
+          View on GitHub
         </a>
       </Footer>
     </div>
