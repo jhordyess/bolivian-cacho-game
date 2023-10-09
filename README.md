@@ -1,6 +1,6 @@
 # Bolivian Cacho Game
 
-A react project for playing the Bolivian dice game Cacho (aka Cacho Alalay, Poker of Dice)
+A react project for practicing the Bolivian dice game Cacho (aka Cacho Alalay, Poker of Dice)
 
 ## Project Status
 

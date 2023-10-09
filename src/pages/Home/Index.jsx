@@ -12,7 +12,8 @@ export default function Home() {
         <h1 className="mb-6 text-center text-3xl font-bold text-gray-900">Bolivian Cacho Game</h1>
 
         <p className="mb-6 text-center text-gray-600">
-          A React project for playing the Bolivian dice game Cacho aka Cacho Alalay, Poker of dices.
+          A React project for practicing the Bolivian dice game Cacho aka Cacho Alalay, Poker of
+          dices.
         </p>
       </Header>
 
