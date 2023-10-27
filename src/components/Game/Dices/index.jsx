@@ -1,5 +1,5 @@
 import React from 'react'
-import { Quinas, Balas, Cuadras, Senas, Trenes, Tontos } from '@components/Icons'
+import { Quinas, Balas, Cuadras, Senas, Trenes, Tontos } from '@/components/Icons'
 
 function getDice(dice) {
   switch (dice) {

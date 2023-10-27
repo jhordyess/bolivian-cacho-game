@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Quinas, Cuadras, Balas, Senas, Trenes, Tontos } from '@components/Icons'
+import { Text, Quinas, Cuadras, Balas, Senas, Trenes, Tontos } from '@/components/Icons'
 
 const classes = {
   icon: 'w-6 absolute top-0 left-0 m-0 border rounded-md',

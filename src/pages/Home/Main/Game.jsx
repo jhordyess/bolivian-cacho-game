@@ -1,6 +1,6 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import GameMain from '@components/Game/index.jsx'
+import GameMain from '@/components/Game/index.jsx'
 
 export default function Game() {
   const [openGame, setOpenGame] = React.useState(false)
