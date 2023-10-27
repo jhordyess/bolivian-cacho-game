@@ -13,5 +13,5 @@
       }
     }
   },
-  "postCreateCommand": "sudo npm i npm -g && npm i"
+  "postCreateCommand": "sudo npm i npm -g && yarn"
 }
