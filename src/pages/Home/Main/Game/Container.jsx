@@ -56,7 +56,7 @@ const defaultDices = [
 
 const maxInvertedDices = 2
 
-export default function Game({ onClose }) {
+export default function Container({ onClose }) {
   const [dices, setDices] = React.useState(defaultDices)
   const [rolling, setRolling] = React.useState(false)
   const [invertedDices, setInvertedDices] = React.useState(0)

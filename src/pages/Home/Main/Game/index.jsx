@@ -1,6 +1,6 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import GameMain from '@/components/Game/index.jsx'
+import GameContainer from './Container'
 
 export default function Game() {
   const [openGame, setOpenGame] = React.useState(false)
@@ -22,7 +22,7 @@ export default function Game() {
         Play now
       </button>
       {openGame &&
-        createPortal(<GameMain onClose={handleCloseGame} />, document.getElementById('modal'))}
+        createPortal(<GameContainer onClose={handleCloseGame} />, document.getElementById('modal'))}
     </div>
   )
 }
