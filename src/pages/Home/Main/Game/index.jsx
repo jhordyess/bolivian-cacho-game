@@ -1,16 +1,17 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 import GameContainer from './Container'
+import { useMachine } from '@/machine/stateMachine'
 
 export default function Game() {
-  const [openGame, setOpenGame] = React.useState(false)
+  const [state, send] = useMachine()
 
   const handleOpenGame = () => {
-    setOpenGame(true)
+    send('START_GAME')
   }
 
   const handleCloseGame = () => {
-    setOpenGame(false)
+    send('CANCEL')
   }
 
   return (
@@ -21,7 +22,7 @@ export default function Game() {
       >
         Play now
       </button>
-      {openGame &&
+      {state.matches('playing') &&
         createPortal(<GameContainer onClose={handleCloseGame} />, document.getElementById('modal'))}
     </div>
   )
