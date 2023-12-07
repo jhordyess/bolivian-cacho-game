@@ -1,13 +1,12 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import Description from './Main/Description'
-import Game from './Main/Game'
 import Main from './Main'
+import Game from '@/feature/Game'
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+    <div className="mx-auto min-h-screen max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
       <Header>
         <h1 className="mb-6 text-center text-3xl font-bold text-gray-900">Bolivian Cacho Game</h1>
 
@@ -20,7 +19,7 @@ export default function Home() {
       <Main>
         <Game />
 
-        <Description>
+        <section className="mx-auto max-w-6xl py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
             <h2 className="text-lg font-medium text-gray-900">What is Cacho?</h2>
             <p className="mt-1 text-gray-600">
@@ -37,7 +36,7 @@ export default function Home() {
               determine the winner.
             </p>
           </div>
-        </Description>
+        </section>
       </Main>
 
       <Footer>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Quinas, Balas, Cuadras, Senas, Trenes, Tontos } from '@/components/Icons'
+import { Quinas, Balas, Cuadras, Senas, Trenes, Tontos } from './icons'
 
 function getDice(dice) {
   switch (dice) {
@@ -23,7 +23,7 @@ function getDice(dice) {
 const Dice = ({ number, handleAlternative, invertible }) => {
   return (
     <div
-      className={`h-10 w-10 cursor-pointer  rounded-md p-0 ${
+      className={`h-14 w-14 cursor-pointer rounded-md p-0 ${
         invertible ? 'bg-blue-200' : 'bg-gray-300'
       }`}
       onClick={handleAlternative}
@@ -34,7 +34,7 @@ const Dice = ({ number, handleAlternative, invertible }) => {
 }
 
 const Dices = ({ children }) => {
-  return <div className="flex w-full flex-row gap-3 border-b border-t p-4">{children}</div>
+  return <div className="flex justify-center gap-3">{children}</div>
 }
 
 export { Dices, Dice }
