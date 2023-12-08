@@ -1,7 +1,6 @@
-import { useMachine as useMachineHook } from '@xstate/react'
 import { createMachine } from 'xstate'
 
-const stateMachine = createMachine({
+const machine = createMachine({
   id: 'stateMachine',
   initial: 'lobby',
   states: {
@@ -92,6 +91,4 @@ const stateMachine = createMachine({
   }
 })
 
-const useMachine = () => useMachineHook(stateMachine)
-
-export { useMachine }
+export default machine

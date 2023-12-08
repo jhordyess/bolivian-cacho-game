@@ -1,12 +1,14 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
 import Modal from './Modal'
-import { useMachine } from '@/machine/stateMachine'
+import { useGame } from '@/context/gameContext'
 
 export default function Game() {
-  const [state, send] = useMachine()
+  const { state, send } = useGame()
 
   const handleOpenGame = () => {
+    console.info('state', state.value)
+    console.info(state.matches('playing'))
     send({ type: 'START_GAME' })
   }
 

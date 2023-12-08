@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { invertDiceNumber, randomDice } from './utils'
+import { useGame } from '@/context/gameContext'
 
 export const useHooks = (maxInvertedDices, defaultDices) => {
+  const { state, send } = useGame()
   const [dices, setDices] = useState(defaultDices)
   const [rolling, setRolling] = useState(false)
   const [invertedDices, setInvertedDices] = useState(0)
 
   const handleAlternative = diceIndex => {
+    console.log(state.value)
     if (rolling && dices.filter(({ value }) => value === 0).length != 0) return
     const newDices = [...dices]
 
@@ -40,6 +43,7 @@ export const useHooks = (maxInvertedDices, defaultDices) => {
     setTimeout(() => {
       window.cancelAnimationFrame(animation)
       setRolling(false)
+      send({ type: 'ROLL' })
     }, 1500)
   }
 
