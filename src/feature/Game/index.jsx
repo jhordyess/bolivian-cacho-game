@@ -7,8 +7,6 @@ export default function Game() {
   const { state, send } = useGame()
 
   const handleOpenGame = () => {
-    console.info('state', state.value)
-    console.info(state.matches('playing'))
     send({ type: 'START_GAME' })
   }
 
@@ -24,7 +22,7 @@ export default function Game() {
       >
         Play now
       </button>
-      {state.matches('playing') &&
+      {!state.matches('lobby') &&
         createPortal(<Modal onClose={handleCloseGame} />, document.getElementById('modal'))}
     </div>
   )
