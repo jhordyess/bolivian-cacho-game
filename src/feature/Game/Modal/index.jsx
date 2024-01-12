@@ -1,9 +1,8 @@
-import React from 'react'
-// import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ScoreChart from './components/ScoreChart'
 import { Dices, Dice } from './components/Dices'
 import { useHooks } from './hooks'
-// import { useGame } from '@/context/gameContext'
+import { useGame } from '@/context/gameContext'
 
 const defaultDices = [
   {
@@ -36,13 +35,13 @@ const defaultDices = [
 const maxInvertedDices = 2
 
 export default function Modal({ onClose }) {
-  // const { state, send } = useGame()
+  const { state, send } = useGame()
 
-  // useEffect(() => {
-  //   if (state.matches('playing')) {
-  //     send({ type: 'IS_PLAYER_TURN' })
-  //   }
-  // }, [state, send])
+  useEffect(() => {
+    if (state.matches('playing')) {
+      send({ type: 'IS_PLAYER_TURN' })
+    }
+  }, [state, send])
 
   const { dices, rolling, rollingDices, handleAlternative } = useHooks(
     maxInvertedDices,
