@@ -49,3 +49,10 @@ yarn add -D husky &&
 
 # Extra packages
 yarn add lodash xstate @xstate/react
+
+# Update yarn
+corepack enable
+yarn set version stable
+yarn install
+yarn up
+yarn upgrade-interactive
