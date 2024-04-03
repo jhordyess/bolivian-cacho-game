@@ -39,7 +39,7 @@ yarn add -D eslint && yarn eslint --init &&
 
 # Local server with serve
 yarn add -D serve &&
-  npm pkg set scripts.start="npm run build && serve -s dist -l 3000"
+  npm pkg set scripts.start="yarn build && serve -s dist -l 3000"
 
 # Git hooks with Husky
 yarn add -D husky &&

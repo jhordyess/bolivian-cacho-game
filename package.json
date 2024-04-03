@@ -20,7 +20,7 @@
   "scripts": {
     "dev": "webpack serve --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js",
-    "start": "npm run build && serve -s dist -l 3000",
+    "start": "yarn build && serve -s dist -l 3000",
     "lint": "eslint . --ext .js,.jsx",
     "format": "prettier --write .",
     "predeploy": "npm run lint && npm run build",
