@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createElement } from 'react'
 import {
   Text,
   Quinas,
@@ -104,7 +104,8 @@ const ScoreChart = ({ name, active }) => (
                   }
                   title={cell.title}
                 >
-                  {React.cloneElement(cell.icon, {
+                  {createElement(cell.icon.type, {
+                    ...cell.icon.props,
                     className: classes.icon
                   })}
                 </td>
