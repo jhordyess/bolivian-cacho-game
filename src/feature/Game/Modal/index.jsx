@@ -34,16 +34,23 @@ const defaultDices = [
 
 const maxInvertedDices = 2
 
-export default function Modal({ onClose }) {
+export default function Modal() {
   const { state, send } = useGame()
 
+  const isPlayerTurn = state.matches('player.turn')
+
+  const handleCloseGame = () => {
+    send({ type: 'CANCEL' })
+  }
+
   useEffect(() => {
+    // Sets the player turn automatically
     if (state.matches('playing')) {
       send({ type: 'IS_PLAYER_TURN' })
     }
   }, [state, send])
 
-  const { dices, rolling, rollingDices, handleAlternative } = useHooks(
+  const { dices, isRolling, rollDices, handleAlternative } = useHooks(
     maxInvertedDices,
     defaultDices
   )
@@ -53,17 +60,17 @@ export default function Modal({ onClose }) {
       <div className="fixed inset-0 flex items-center justify-center gap-4 overflow-y-auto bg-[#C19A6B] px-12">
         <div className="mx-auto flex h-[550px] w-[870px] flex-col gap-6 border bg-white py-6">
           <div className="flex gap-12">
-            <ScoreChart name="Player 1" />
+            <ScoreChart name="Player 1" active={isPlayerTurn} />
             <ScoreChart name="Player 2" />
           </div>
 
           <div className="flex h-full items-center justify-center border-t p-8">
             <button
               className={`mx-auto h-20 w-20 rounded-full bg-red-200 font-bold text-white hover:bg-red-400 ${
-                rolling ? 'cursor-not-allowed bg-gray-200 hover:bg-gray-200' : ''
+                isRolling ? 'cursor-not-allowed bg-gray-200 hover:bg-gray-200' : ''
               }`}
-              onClick={onClose}
-              disabled={rolling}
+              onClick={handleCloseGame}
+              disabled={isRolling}
             >
               Exit
             </button>
@@ -83,11 +90,11 @@ export default function Modal({ onClose }) {
 
             <button
               className={`mx-auto h-20 w-20 rounded-full bg-blue-400 font-bold text-white hover:bg-blue-600 ${
-                rolling ? 'cursor-not-allowed bg-gray-200 hover:bg-gray-200' : ''
+                isRolling ? 'cursor-not-allowed bg-gray-200 hover:bg-gray-200' : ''
               }`}
               title="Roll dices / End turn"
-              onClick={rollingDices}
-              disabled={rolling}
+              onClick={rollDices}
+              disabled={isRolling}
             >
               ROLL
             </button>

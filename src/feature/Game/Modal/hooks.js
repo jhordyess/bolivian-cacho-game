@@ -5,12 +5,12 @@ import { useGame } from '@/context/gameContext'
 export const useHooks = (maxInvertedDices, defaultDices) => {
   const { state, send } = useGame()
   const [dices, setDices] = useState(defaultDices)
-  const [rolling, setRolling] = useState(false)
+  const [isRolling, setRolling] = useState(false)
   const [invertedDices, setInvertedDices] = useState(0)
 
   const handleAlternative = diceIndex => {
     console.log(state.value)
-    if (rolling && dices.filter(({ value }) => value === 0).length != 0) return
+    if (isRolling && dices.filter(({ value }) => value === 0).length != 0) return
     const newDices = [...dices]
 
     if (maxInvertedDices > invertedDices && !newDices[diceIndex].inverted) {
@@ -37,7 +37,7 @@ export const useHooks = (maxInvertedDices, defaultDices) => {
     animation = window.requestAnimationFrame(roll)
   }
 
-  const rollingDices = () => {
+  const rollDices = () => {
     setRolling(true)
     animation = window.requestAnimationFrame(roll)
     setTimeout(() => {
@@ -49,8 +49,8 @@ export const useHooks = (maxInvertedDices, defaultDices) => {
 
   return {
     dices,
-    rolling,
+    isRolling,
     handleAlternative,
-    rollingDices
+    rollDices
   }
 }

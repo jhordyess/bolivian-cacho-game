@@ -10,9 +10,7 @@ export default function Game() {
     send({ type: 'START_GAME' })
   }
 
-  const handleCloseGame = () => {
-    send({ type: 'CANCEL' })
-  }
+  const isLobby = state.matches('lobby')
 
   return (
     <div className="text-center">
@@ -22,8 +20,7 @@ export default function Game() {
       >
         Play now
       </button>
-      {!state.matches('lobby') &&
-        createPortal(<Modal onClose={handleCloseGame} />, document.getElementById('modal'))}
+      {!isLobby && createPortal(<Modal />, document.getElementById('modal'))}
     </div>
   )
 }
