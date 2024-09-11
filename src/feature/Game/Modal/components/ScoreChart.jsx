@@ -89,7 +89,7 @@ const tableData = [
   ]
 ]
 
-const ScoreChart = () => (
+const ScoreChart = ({ name, active }) => (
   <div className="w-full">
     <table className="mx-auto">
       <tbody>
@@ -99,7 +99,9 @@ const ScoreChart = () => (
               cell ? (
                 <td
                   key={`${i}-${j}`}
-                  className={cell.tdClassName + ' ' + classes.td}
+                  className={
+                    cell.tdClassName + ' ' + classes.td + ' ' + (active ? 'border-blue-500' : '')
+                  }
                   title={cell.title}
                 >
                   {React.cloneElement(cell.icon, {
@@ -114,6 +116,10 @@ const ScoreChart = () => (
         ))}
       </tbody>
     </table>
+
+    <section className={`mt-4 flex justify-center ${active ? 'text-blue-500' : ''}`}>
+      {name}
+    </section>
   </div>
 )
 
