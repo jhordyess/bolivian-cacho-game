@@ -159,7 +159,7 @@ const machine = createMachine(
               CANCEL: '#stateMachine.lobby'
             },
             entry: assign({
-              board: ({ board }) => ({
+              board: ({ context: { board } }) => ({
                 ...board,
                 rollCount: 0,
                 dices: board.dices.map(dice => ({
@@ -176,7 +176,7 @@ const machine = createMachine(
               ROLLED: {
                 actions: assign({
                   //Required, auto when entering to the state? :thinking:
-                  board: ({ board }, event) => ({
+                  board: ({ context: { board }, event }) => ({
                     ...board,
                     dices: board.dices.map(dice =>
                       dice.locked ? dice : { ...dice, value: event.dices[dice.id - 1] }
@@ -186,11 +186,11 @@ const machine = createMachine(
               },
               ROLL: {
                 target: 'roll',
-                cond: 'canRollAgain'
+                guard: 'canRollAgain'
               },
               BLOCK_DICES: {
                 actions: assign({
-                  board: ({ board }, event) => ({
+                  board: ({ context: { board }, event }) => ({
                     ...board,
                     ...(board.rollCount === 1 && {
                       dices: board.dices.map(dice =>
@@ -205,7 +205,7 @@ const machine = createMachine(
               CANCEL: '#stateMachine.lobby'
             },
             entry: assign({
-              board: ({ board }) => ({
+              board: ({ context: { board } }) => ({
                 ...board,
                 rollCount: board.rollCount + 1
               })
@@ -215,7 +215,7 @@ const machine = createMachine(
             on: {
               HAND_CHOSEN: {
                 actions: assign({
-                  player: ({ player }, event) => ({
+                  player: ({ context: { player }, event }) => ({
                     hand: player.hand.map(hand =>
                       hand.name === event.hand.name ? { ...hand, value: event.value } : hand
                     ),
@@ -239,7 +239,7 @@ const machine = createMachine(
               CANCEL: '#stateMachine.lobby'
             },
             entry: assign({
-              board: ({ board }) => ({
+              board: ({ context: { board } }) => ({
                 ...board,
                 rollCount: 0,
                 dices: board.dices.map(dice => ({
@@ -255,7 +255,7 @@ const machine = createMachine(
             on: {
               ROLLED: {
                 actions: assign({
-                  board: ({ board }, event) => ({
+                  board: ({ context: { board }, event }) => ({
                     ...board,
                     dices: board.dices.map(dice =>
                       dice.locked ? dice : { ...dice, value: event.dices[dice.id - 1] }
@@ -265,11 +265,11 @@ const machine = createMachine(
               },
               ROLL: {
                 target: 'roll',
-                cond: 'canRollAgain'
+                guard: 'canRollAgain'
               },
               BLOCK_DICES: {
                 actions: assign({
-                  board: ({ board }, event) => ({
+                  board: ({ context: { board }, event }) => ({
                     ...board,
                     ...(board.rollCount === 1 && {
                       dices: board.dices.map(dice =>
@@ -284,7 +284,7 @@ const machine = createMachine(
               CANCEL: '#stateMachine.lobby'
             },
             entry: assign({
-              board: ({ board }) => ({
+              board: ({ context: { board } }) => ({
                 ...board,
                 rollCount: board.rollCount + 1
               })
@@ -294,7 +294,7 @@ const machine = createMachine(
             on: {
               HAND_CHOSEN: {
                 actions: assign({
-                  bot: ({ bot }, event) => ({
+                  bot: ({ context: { bot }, event }) => ({
                     hand: bot.hand.map(hand =>
                       hand.name === event.hand.name ? { ...hand, value: event.value } : hand
                     ),
