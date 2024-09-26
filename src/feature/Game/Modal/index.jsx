@@ -4,40 +4,12 @@ import { Dices, Dice } from './components/Dices'
 import { useHooks } from './hooks'
 import { useGame } from '@/context/gameContext'
 
-const defaultDices = [
-  {
-    id: 1,
-    value: 0,
-    inverted: false
-  },
-  {
-    id: 2,
-    value: 0,
-    inverted: false
-  },
-  {
-    id: 3,
-    value: 0,
-    inverted: false
-  },
-  {
-    id: 4,
-    value: 0,
-    inverted: false
-  },
-  {
-    id: 5,
-    value: 0,
-    inverted: false
-  }
-]
-
 const maxInvertedDices = 2
 
 export default function Modal() {
   const { state, send } = useGame()
 
-  const isPlayerTurn = state.matches('player.turn')
+  const isPlayerIdle = state.matches('player.idle')
 
   const handleCloseGame = () => {
     send({ type: 'CANCEL' })
@@ -50,17 +22,14 @@ export default function Modal() {
     }
   }, [state, send])
 
-  const { dices, isRolling, rollDices, handleAlternative } = useHooks(
-    maxInvertedDices,
-    defaultDices
-  )
+  const { dices, isRolling, rollDices, handleAlternative } = useHooks(maxInvertedDices)
 
   return (
     <div className="max-h-screen min-w-full">
       <div className="fixed inset-0 flex items-center justify-center gap-4 overflow-y-auto bg-[#C19A6B] px-12">
         <div className="mx-auto flex h-[550px] w-[870px] flex-col gap-6 border bg-white py-6">
           <div className="flex gap-12">
-            <ScoreChart name="Player 1" active={isPlayerTurn} />
+            <ScoreChart name="Player 1" active={isPlayerIdle} />
             <ScoreChart name="Player 2" />
           </div>
 
