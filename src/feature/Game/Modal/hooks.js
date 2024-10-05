@@ -42,6 +42,10 @@ export const useHooks = maxInvertedDices => {
   }
 
   const rollDices = () => {
+    const isStateRoll = state.matches('playing.roll')
+
+    if (!isStateRoll) send({ type: 'ROLL' })
+
     if (rollCount < 2) {
       setRolling(true)
       animation = window.requestAnimationFrame(roll)
