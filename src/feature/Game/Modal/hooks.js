@@ -6,6 +6,7 @@ export const useHooks = maxInvertedDices => {
   const { state, send } = useGame()
 
   const dices = state.context.board.dices
+  const rollCount = state.context.board.rollCount
 
   const [isRolling, setRolling] = useState(false)
   const [invertedDices, setInvertedDices] = useState(0)
@@ -26,6 +27,7 @@ export const useHooks = maxInvertedDices => {
     // setDices(newDices)
   }
 
+  //Roll dice and start the rol
   let animation
   const roll = () => {
     if (invertedDices === maxInvertedDices) setInvertedDices(0)
@@ -35,19 +37,22 @@ export const useHooks = maxInvertedDices => {
       value: randomDice(),
       inverted: false
     }))
-    send({ type: 'ROLLED', dices: rollDices.map(({ value }) => value) })
+    send({ type: 'ROLLDICE', dices: rollDices.map(({ value }) => value) })
     animation = window.requestAnimationFrame(roll)
   }
 
   const rollDices = () => {
-    setRolling(true)
-    send({ type: 'ROLL' })
-    animation = window.requestAnimationFrame(roll)
-    setTimeout(() => {
-      window.cancelAnimationFrame(animation)
-      setRolling(false)
-      // send({ type: 'ROLL' })
-    }, 1500)
+    if (rollCount < 2) {
+      setRolling(true)
+      animation = window.requestAnimationFrame(roll)
+      setTimeout(() => {
+        window.cancelAnimationFrame(animation)
+        setRolling(false)
+        send({ type: 'ROLLED' })
+      }, 1500)
+    } else {
+      alert('You have reached the maximum number of rolls')
+    }
   }
 
   return {
