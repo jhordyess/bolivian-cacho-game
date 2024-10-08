@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Quinas, Balas, Cuadras, Senas, Trenes, Tontos } from './icons'
+import Stripe from './icons/Stripe'
 
 function getDice(dice) {
   switch (dice) {
@@ -20,15 +21,32 @@ function getDice(dice) {
   }
 }
 
-const Dice = ({ number, handleAlternative, invertible }) => {
+const Dice = ({ number, isLock, isFlip, handleLock, handleFlip }) => {
+  const divRef = useRef(null)
+
+  const handleMouseDown = e => {
+    const isLeftClick = e.button === 0
+    const isRightClick = e.button === 2
+
+    if (isLeftClick && handleLock) handleLock()
+
+    if (isRightClick && handleFlip) handleFlip()
+  }
+
   return (
     <div
-      className={`h-14 w-14 cursor-pointer rounded-md p-0 ${
-        invertible ? 'bg-blue-200' : 'bg-gray-300'
+      className={`relative h-14 w-14 cursor-pointer rounded-md p-0 hover:opacity-50 ${
+        isFlip ? 'bg-blue-200' : 'bg-gray-300'
       }`}
-      onClick={handleAlternative}
+      ref={divRef}
+      onContextMenu={e => {
+        e.preventDefault()
+      }}
+      onMouseDown={handleMouseDown}
     >
       {getDice(number)}
+
+      {isLock && <Stripe className="absolute left-0 top-0 h-full w-full rounded-md" />}
     </div>
   )
 }
