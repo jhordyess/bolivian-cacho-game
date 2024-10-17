@@ -4,8 +4,6 @@ import { Dices, Dice } from './components/Dices'
 import { useHooks } from './hooks'
 import { useGame } from '@/context/gameContext'
 
-const maxInvertedDices = 2
-
 export default function Modal() {
   const { state, send } = useGame()
 
@@ -22,7 +20,7 @@ export default function Modal() {
     }
   }, [state, send])
 
-  const { dices, isRolling, rollDices, handleAlternative } = useHooks(maxInvertedDices)
+  const { dices, isRolling, rollDices, handleFlip, handleLock } = useHooks()
 
   return (
     <div className="max-h-screen min-w-full">
@@ -45,14 +43,14 @@ export default function Modal() {
             </button>
 
             <Dices>
-              {dices.map(({ id, value, inverted }, index) => (
+              {dices.map(({ id, value, inverted, locked }, index) => (
                 <Dice
                   key={id + '-' + index}
                   number={value}
-                  handleAlternative={() => {
-                    handleAlternative(index)
-                  }}
-                  invertible={inverted}
+                  handleFlip={() => handleFlip(id)}
+                  handleLock={() => handleLock(id)}
+                  isLock={locked}
+                  isFlip={inverted}
                 />
               ))}
             </Dices>

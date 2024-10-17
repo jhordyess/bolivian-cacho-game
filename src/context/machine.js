@@ -1,11 +1,16 @@
 import { assign, createMachine } from 'xstate'
 
+const maxFlips = 2
+const maxBlocks = 2
+
 const machine = createMachine({
   id: 'stateMachine',
   initial: 'lobby',
   context: {
     board: {
       rollCount: 0,
+      flipCount: 0,
+      blockCount: 0,
       dices: [
         {
           id: 1,
@@ -161,6 +166,7 @@ const machine = createMachine({
             board: ({ context: { board } }) => ({
               ...board,
               rollCount: 0,
+              flipCount: 0,
               dices: board.dices.map(dice => ({
                 ...dice,
                 value: 0,
@@ -172,7 +178,7 @@ const machine = createMachine({
         },
         roll: {
           on: {
-            ROLLDICE: {
+            ROLLDICES: {
               actions: assign({
                 board: ({ context: { board }, event }) => ({
                   ...board,
@@ -190,15 +196,38 @@ const machine = createMachine({
                 })
               })
             },
-            BLOCK_DICES: {
+            BLOCK_DICE: {
               actions: assign({
                 board: ({ context: { board }, event }) => ({
                   ...board,
-                  ...(board.rollCount === 1 && {
+                  ...(board.rollCount === 1 &&
+                    board.blockCount < maxBlocks &&
+                    board.dices[event.diceId - 1].locked === false && {
+                      dices: board.dices.map(dice =>
+                        dice.id === event.diceId ? { ...dice, locked: true } : dice
+                      ),
+                      blockCount: board.blockCount + 1
+                    })
+                })
+              })
+            },
+            FLIP_DICE: {
+              actions: assign({
+                board: ({ context: { board }, event }) => ({
+                  ...board,
+                  ...(board.dices[event.diceId - 1].inverted === true && {
+                    flipCount: board.flipCount - 1,
                     dices: board.dices.map(dice =>
-                      event.diceIds.includes(dice.id) ? { ...dice, locked: true } : dice
+                      dice.id === event.diceId ? { ...dice, inverted: false } : dice
                     )
-                  })
+                  }),
+                  ...(board.dices[event.diceId - 1].inverted === false &&
+                    board.flipCount < maxFlips && {
+                      flipCount: board.flipCount + 1,
+                      dices: board.dices.map(dice =>
+                        dice.id === event.diceId ? { ...dice, inverted: true } : dice
+                      )
+                    })
                 })
               })
             },
