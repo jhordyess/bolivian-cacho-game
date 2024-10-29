@@ -1,58 +1,37 @@
 const straightPatterns = [
-  {
-    id: 1,
-    pattern: [1, 2, 3, 4, 5] //IBIDEM
-  },
-  {
-    id: 2,
-    pattern: [2, 3, 4, 5, 6] //IBIDEM
-  },
-  {
-    id: 3,
-    pattern: [1, 3, 4, 5, 6] //ORIGINAL: 3, 4, 5, 6, 1
-  },
-  {
-    id: 4,
-    pattern: [1, 2, 4, 5, 6] //ORIGINAL: 4, 5, 6, 1, 2
-  },
-  {
-    id: 5,
-    pattern: [1, 2, 3, 5, 6] //ORIGINAL: 5, 6, 1, 2, 3
-  },
-  {
-    id: 6,
-    pattern: [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
-  }
+  [1, 2, 3, 4, 5], //IBIDEM
+  [2, 3, 4, 5, 6], //IBIDEM
+  [1, 3, 4, 5, 6], //ORIGINAL: 3, 4, 5, 6, 1
+  [1, 2, 4, 5, 6], //ORIGINAL: 4, 5, 6, 1, 2
+  [1, 2, 3, 5, 6], //ORIGINAL: 5, 6, 1, 2, 3
+  [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
 ]
 
-const checkIfStraight = dices => {
-  const sortedDices = dices.slice().sort((a, b) => a - b)
-
-  return (
-    straightPatterns.find(({ pattern }) =>
-      pattern.every((value, index) => value === sortedDices[index])
-    ) || null
-  )
-}
-
-const dicesPuntuation = dices => {
-  const dicesCount = dices.reduce((acc, dice) => {
+export const handCalculation = dicesValue => {
+  const dicesCount = dicesValue.reduce((acc, dice) => {
     acc[dice] = acc[dice] ? acc[dice] + 1 : 1
     return acc
   }, {})
 
-  return Object.entries(dicesCount).reduce((acc, [dice, count]) => {
+  const sortedDices = dicesValue.slice().sort((a, b) => a - b)
+
+  const isStraight = straightPatterns.some(pattern =>
+    pattern.every((value, index) => value === sortedDices[index])
+  )
+
+  const isFull = Object.values(dicesCount).includes(3) && Object.values(dicesCount).includes(2)
+
+  const isPoker = Object.values(dicesCount).includes(4)
+
+  const isGrande = Object.values(dicesCount).includes(5)
+
+  const dicesCounts = Object.entries(dicesCount).reduce((acc, [dice, count]) => {
     const puntuation = count * dice
     return {
       ...acc,
       [dice]: puntuation
     }
   }, {})
-}
-
-const handCalculation = dicesValue => {
-  const dicesCounts = dicesPuntuation(dicesValue)
-  const isStraight = checkIfStraight(dicesValue)
 
   return {
     balas: dicesCounts[1] || 0,
@@ -61,11 +40,9 @@ const handCalculation = dicesValue => {
     cuadras: dicesCounts[4] || 0,
     quinas: dicesCounts[5] || 0,
     senas: dicesCounts[6] || 0,
-    straight: isStraight ? 20 : 0
+    straight: isStraight ? 20 : 0,
+    full: isFull ? 30 : 0,
+    poker: isPoker ? 40 : 0,
+    grande: isGrande ? 50 : 0
   }
 }
-
-const sample = [3, 1, 1, 6, 5]
-
-console.log('sample', sample)
-console.log(handCalculation(sample)) // 20
