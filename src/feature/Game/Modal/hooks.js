@@ -25,12 +25,13 @@ export const useHooks = () => {
   //Roll dice and start the rol
   let animation
   const roll = () => {
-    const rollDices = dices.map(dice => ({
+    const newDices = dices.map(dice => ({
       ...dice,
-      value: randomDice(),
+      value: dice.locked ? dice.value : randomDice(),
       inverted: false
     }))
-    send({ type: 'ROLLDICES', dices: rollDices.map(({ value }) => value) })
+
+    send({ type: 'ROLLDICES', newDices })
     animation = window.requestAnimationFrame(roll)
   }
 
