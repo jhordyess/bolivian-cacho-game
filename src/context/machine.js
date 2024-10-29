@@ -167,6 +167,7 @@ const machine = createMachine({
               ...board,
               rollCount: 0,
               flipCount: 0,
+              blockCount: 0,
               dices: board.dices.map(dice => ({
                 ...dice,
                 value: 0,
@@ -182,9 +183,7 @@ const machine = createMachine({
               actions: assign({
                 board: ({ context: { board }, event }) => ({
                   ...board,
-                  dices: board.dices.map(dice =>
-                    dice.locked ? dice : { ...dice, value: event.dices[dice.id - 1] }
-                  )
+                  dices: event.newDices
                 })
               })
             },
@@ -192,7 +191,8 @@ const machine = createMachine({
               actions: assign({
                 board: ({ context: { board } }) => ({
                   ...board,
-                  rollCount: board.rollCount + 1
+                  rollCount: board.rollCount + 1,
+                  flipCount: 0
                 })
               })
             },
