@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { randomDice } from './utils'
 import { useGame } from '@/context/gameContext'
-import { handCalculation } from './handCalc'
 
 const maxRolls = 2
 
