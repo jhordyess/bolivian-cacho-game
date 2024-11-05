@@ -1,3 +1,1 @@
-export function randomDice() {
-  return Math.floor(Math.random() * 6) + 1
-}
+export const randomDice = () => Math.floor(Math.random() * 6) + 1
