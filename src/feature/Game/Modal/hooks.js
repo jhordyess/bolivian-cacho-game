@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { randomDice } from './utils'
 import { useGame } from '@/context/gameContext'
+import { handCalculation } from './handCalc'
 
 const maxRolls = 2
 
@@ -9,6 +10,8 @@ export const useHooks = () => {
 
   const dices = state.context.board.dices
   const rollCount = state.context.board.rollCount
+  const playerHand = state.context.player.hand
+  const playerOptions = state.context.player.options
 
   const [isRolling, setRolling] = useState(false)
 
@@ -56,6 +59,8 @@ export const useHooks = () => {
     isRolling,
     rollDices,
     handleLock,
-    handleFlip
+    handleFlip,
+    playerHand,
+    playerOptions
   }
 }

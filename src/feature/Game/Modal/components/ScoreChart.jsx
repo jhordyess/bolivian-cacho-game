@@ -10,8 +10,10 @@ import {
 } from '@/feature/Game/Modal/components/Dices/icons'
 
 const classes = {
-  icon: 'w-6 absolute top-0 left-0 m-0 border rounded-md hidden',
-  td: 'w-14 h-14 px-4 py-3 relative cursor-pointer border-gray-400'
+  icon: 'w-6 absolute top-0 left-0 m-0 border rounded-md',
+  td: 'w-14 h-14 px-4 py-3 relative cursor-pointer',
+  tdOption: 'text-yellow-500',
+  tdValue: 'text-blue-500'
 }
 
 const color = '#9CA3AF'
@@ -89,18 +91,27 @@ const tableData = [
   ]
 ]
 
-const ScoreChart = ({ name, active }) => (
+const ScoreChart = ({ name, active, options, values }) => (
   <div className="w-full">
     <table className="mx-auto">
       <tbody>
         {tableData.map((row, i) => (
           <tr key={i}>
-            {row.map((cell, j) =>
-              cell ? (
+            {row.map((cell, j) => {
+              if (!cell) return <td key={`${i}-${j}`} />
+
+              const value = values?.[cell.name]
+              const option = options?.[cell.name] || ''
+
+              return (
                 <td
                   key={`${i}-${j}`}
                   className={
-                    cell.tdClassName + ' ' + classes.td + ' ' + (active ? 'border-blue-500' : '')
+                    cell.tdClassName +
+                    ' ' +
+                    classes.td +
+                    ' ' +
+                    (active ? 'border-blue-400' : ' border-gray-400')
                   }
                   title={cell.title}
                 >
@@ -108,11 +119,12 @@ const ScoreChart = ({ name, active }) => (
                     ...cell.icon.props,
                     className: classes.icon
                   })}
+                  <span className={value ? classes.tdValue : classes.tdOption}>
+                    {value ? value : option}
+                  </span>
                 </td>
-              ) : (
-                <td key={`${i}-${j}`} />
               )
-            )}
+            })}
           </tr>
         ))}
       </tbody>

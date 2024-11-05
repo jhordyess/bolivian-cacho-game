@@ -20,14 +20,20 @@ export default function Modal() {
     }
   }, [state, send])
 
-  const { dices, isRolling, rollDices, handleFlip, handleLock } = useHooks()
+  const { dices, isRolling, rollDices, handleFlip, handleLock, playerHand, playerOptions } =
+    useHooks()
 
   return (
     <div className="max-h-screen min-w-full">
       <div className="fixed inset-0 flex items-center justify-center gap-4 overflow-y-auto bg-[#C19A6B] px-12">
         <div className="mx-auto flex h-[550px] w-[870px] flex-col gap-6 border bg-white py-6">
           <div className="flex gap-12">
-            <ScoreChart name="Player 1" active={isPlayerIdle} />
+            <ScoreChart
+              name="Player 1"
+              active={isPlayerIdle}
+              options={playerOptions}
+              values={playerHand}
+            />
             <ScoreChart name="Player 2" />
           </div>
 

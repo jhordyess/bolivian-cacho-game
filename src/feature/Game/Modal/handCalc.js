@@ -1,10 +1,10 @@
 const straightPatterns = [
   [1, 2, 3, 4, 5], //IBIDEM
   [2, 3, 4, 5, 6], //IBIDEM
-  [1, 3, 4, 5, 6], //ORIGINAL: 3, 4, 5, 6, 1
-  [1, 2, 4, 5, 6], //ORIGINAL: 4, 5, 6, 1, 2
-  [1, 2, 3, 5, 6], //ORIGINAL: 5, 6, 1, 2, 3
-  [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
+  [1, 3, 4, 5, 6] //ORIGINAL: 3, 4, 5, 6, 1
+  // [1, 2, 4, 5, 6], //ORIGINAL: 4, 5, 6, 1, 2
+  // [1, 2, 3, 5, 6], //ORIGINAL: 5, 6, 1, 2, 3
+  // [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
 ]
 
 export const handCalculation = dicesValue => {
@@ -40,7 +40,7 @@ export const handCalculation = dicesValue => {
     cuadras: dicesCounts[4] || 0,
     quinas: dicesCounts[5] || 0,
     senas: dicesCounts[6] || 0,
-    straight: isStraight ? 20 : 0,
+    escalera: isStraight ? 20 : 0,
     full: isFull ? 30 : 0,
     poker: isPoker ? 40 : 0,
     grande: isGrande ? 50 : 0
