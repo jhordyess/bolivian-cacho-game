@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { Quinas, Balas, Cuadras, Senas, Trenes, Tontos } from './icons'
 import Stripe from './icons/Stripe'
 

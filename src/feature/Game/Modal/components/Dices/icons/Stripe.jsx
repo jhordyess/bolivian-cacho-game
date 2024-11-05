@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Stripe = ({ className, color = '#000000' }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className={className}>
     <defs>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import ScoreChart from './components/ScoreChart'
 import { Dices, Dice } from './components/Dices'
 import { useHooks } from './hooks'
