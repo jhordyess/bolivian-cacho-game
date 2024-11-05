@@ -212,24 +212,34 @@ const machine = createMachine({
               })
             },
             FLIP_DICE: {
-              actions: assign({
-                board: ({ context: { board }, event }) => ({
-                  ...board,
-                  ...(board.dices[event.diceId - 1].inverted
-                    ? {
-                        flipCount: board.flipCount - 1,
-                        dices: board.dices.map(dice =>
-                          dice.id === event.diceId ? { ...dice, inverted: false } : dice
-                        )
-                      }
-                    : board.flipCount < maxFlips && {
-                        flipCount: board.flipCount + 1,
-                        dices: board.dices.map(dice =>
-                          dice.id === event.diceId ? { ...dice, inverted: true } : dice
-                        )
-                      })
+              actions: [
+                assign({
+                  board: ({ context: { board }, event }) => ({
+                    ...board,
+                    ...(board.dices[event.diceId - 1].inverted
+                      ? {
+                          flipCount: board.flipCount - 1,
+                          dices: board.dices.map(dice =>
+                            dice.id === event.diceId ? { ...dice, inverted: false } : dice
+                          )
+                        }
+                      : board.flipCount < maxFlips && {
+                          flipCount: board.flipCount + 1,
+                          dices: board.dices.map(dice =>
+                            dice.id === event.diceId ? { ...dice, inverted: true } : dice
+                          )
+                        })
+                  })
+                }),
+                assign({
+                  player: ({ context: { player, board } }) => ({
+                    ...player,
+                    options: handCalculation(
+                      board.dices.map(dice => (dice.inverted ? 7 - dice.value : dice.value))
+                    )
+                  })
                 })
-              })
+              ]
             },
             HAND_CHOICE: 'handChoice',
             SURRENDER: '#stateMachine.playing',
