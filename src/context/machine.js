@@ -1,4 +1,4 @@
-import { handCalculation } from '@/feature/Game/Modal/handCalc'
+import { handCalculation } from '@/utils/handCalc'
 import { assign, createMachine } from 'xstate'
 
 const maxFlips = 2
