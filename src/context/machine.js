@@ -215,19 +215,19 @@ const machine = createMachine({
               actions: assign({
                 board: ({ context: { board }, event }) => ({
                   ...board,
-                  ...(board.dices[event.diceId - 1].inverted === true && {
-                    flipCount: board.flipCount - 1,
-                    dices: board.dices.map(dice =>
-                      dice.id === event.diceId ? { ...dice, inverted: false } : dice
-                    )
-                  }),
-                  ...(board.dices[event.diceId - 1].inverted === false &&
-                    board.flipCount < maxFlips && {
-                      flipCount: board.flipCount + 1,
-                      dices: board.dices.map(dice =>
-                        dice.id === event.diceId ? { ...dice, inverted: true } : dice
-                      )
-                    })
+                  ...(board.dices[event.diceId - 1].inverted
+                    ? {
+                        flipCount: board.flipCount - 1,
+                        dices: board.dices.map(dice =>
+                          dice.id === event.diceId ? { ...dice, inverted: false } : dice
+                        )
+                      }
+                    : board.flipCount < maxFlips && {
+                        flipCount: board.flipCount + 1,
+                        dices: board.dices.map(dice =>
+                          dice.id === event.diceId ? { ...dice, inverted: true } : dice
+                        )
+                      })
                 })
               })
             },
