@@ -1,3 +1,4 @@
+import { handCalculation } from '@/feature/Game/Modal/handCalc'
 import { assign, createMachine } from 'xstate'
 
 const maxFlips = 2
@@ -46,93 +47,45 @@ const machine = createMachine({
     },
     player: {
       score: 0,
-      hand: [
-        {
-          name: 'balas',
-          value: 0
-        },
-        {
-          name: 'escalera',
-          value: 0
-        },
-        {
-          name: 'cuadras',
-          value: 0
-        },
-        {
-          name: 'tontos',
-          value: 0
-        },
-        {
-          name: 'full',
-          value: 0
-        },
-        {
-          name: 'quinas',
-          value: 0
-        },
-        {
-          name: 'trenes',
-          value: 0
-        },
-        {
-          name: 'poker',
-          value: 0
-        },
-        {
-          name: 'senas',
-          value: 0
-        },
-        {
-          name: 'grande',
-          value: 0
-        }
-      ]
+      hand: {
+        balas: 0,
+        tontos: 0,
+        trenes: 0,
+        cuadras: 0,
+        quinas: 0,
+        senas: 0,
+        escalera: 0,
+        full: 0,
+        poker: 0,
+        grande: 0
+      },
+      options: {
+        balas: 0,
+        tontos: 0,
+        trenes: 0,
+        cuadras: 0,
+        quinas: 0,
+        senas: 0,
+        escalera: 0,
+        full: 0,
+        poker: 0,
+        grande: 0
+      }
     },
     bot: {
       score: 0,
-      hand: [
-        {
-          name: 'balas',
-          value: 0
-        },
-        {
-          name: 'escalera',
-          value: 0
-        },
-        {
-          name: 'cuadras',
-          value: 0
-        },
-        {
-          name: 'tontos',
-          value: 0
-        },
-        {
-          name: 'full',
-          value: 0
-        },
-        {
-          name: 'quinas',
-          value: 0
-        },
-        {
-          name: 'trenes',
-          value: 0
-        },
-        {
-          name: 'poker',
-          value: 0
-        },
-        {
-          name: 'senas',
-          value: 0
-        },
-        {
-          name: 'grande',
-          value: 0
-        }
-      ]
+      hand: {
+        balas: 0,
+        tontos: 0,
+        trenes: 0,
+        cuadras: 0,
+        quinas: 0,
+        senas: 0,
+        escalera: 0,
+        full: 0,
+        poker: 0,
+        grande: 0
+      }
     }
   },
   states: {
@@ -174,6 +127,34 @@ const machine = createMachine({
                 locked: false,
                 inverted: false
               }))
+            }),
+            player: ({ context: { player } }) => ({
+              ...player,
+              score: 0,
+              hand: {
+                balas: 0,
+                tontos: 0,
+                trenes: 0,
+                cuadras: 0,
+                quinas: 0,
+                senas: 0,
+                escalera: 0,
+                full: 0,
+                poker: 0,
+                grande: 0
+              },
+              options: {
+                balas: 0,
+                tontos: 0,
+                trenes: 0,
+                cuadras: 0,
+                quinas: 0,
+                senas: 0,
+                escalera: 0,
+                full: 0,
+                poker: 0,
+                grande: 0
+              }
             })
           })
         },
@@ -184,6 +165,21 @@ const machine = createMachine({
                 board: ({ context: { board }, event }) => ({
                   ...board,
                   dices: event.newDices
+                }),
+                player: ({ context: { player } }) => ({
+                  ...player,
+                  options: {
+                    balas: 0,
+                    tontos: 0,
+                    trenes: 0,
+                    cuadras: 0,
+                    quinas: 0,
+                    senas: 0,
+                    escalera: 0,
+                    full: 0,
+                    poker: 0,
+                    grande: 0
+                  }
                 })
               })
             },
@@ -193,6 +189,10 @@ const machine = createMachine({
                   ...board,
                   rollCount: board.rollCount + 1,
                   flipCount: 0
+                }),
+                player: ({ context: { player, board } }) => ({
+                  ...player,
+                  options: handCalculation(board.dices.map(dice => dice.value))
                 })
               })
             },
