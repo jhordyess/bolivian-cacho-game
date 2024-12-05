@@ -1,18 +1,18 @@
-const path = require('path')
+const path = require('node:path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'index.jsx'),
+  entry: path.resolve('src', 'index.jsx'),
   mode: 'development',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('dist'),
     filename: 'bundle.js'
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve('src')
     }
   },
   module: {
@@ -30,7 +30,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index.html'),
+      template: path.resolve('public', 'index.html'),
       filename: 'index.html'
     }),
     new MiniCssExtractPlugin({
@@ -39,9 +39,9 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist')
+      directory: path.resolve('dist')
     },
-    watchFiles: path.join(__dirname, 'src', '**'),
+    watchFiles: path.resolve('src', '**'),
     port: 3640
   }
 }
