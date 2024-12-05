@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CnameWebpackPlugin = require('cname-webpack-plugin')
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
   entry: path.resolve('src', 'index.jsx'),
   mode: 'production',
