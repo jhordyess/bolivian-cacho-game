@@ -8,7 +8,9 @@ const CnameWebpackPlugin = require('cname-webpack-plugin')
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
-  entry: path.resolve('src', 'index.jsx'),
+  entry: {
+    app: path.resolve('src', 'index.jsx')
+  },
   mode: 'production',
   output: {
     path: path.resolve('dist'),
@@ -48,6 +50,17 @@ module.exports = {
   ],
   optimization: {
     minimize: true,
-    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()]
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        myCacheGroup: {
+          test: /node_modules/,
+          chunks: 'all',
+          name: 'vendor',
+          enforce: true
+        }
+      }
+    }
   }
 }
