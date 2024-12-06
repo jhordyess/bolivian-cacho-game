@@ -1,1 +1,2 @@
-npm run lint
+# .husky/pre-push
+npm run lint && (paplay "$HOME/Music/ta-bien-goku.wav" || true)
