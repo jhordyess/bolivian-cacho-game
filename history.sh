@@ -40,7 +40,7 @@ yarn add -D serve &&
 # Git hooks with Husky
 yarn add -D husky &&
   yarn husky &&
-  touch .husky/pre-push && cat "yarn lint" > .husky/pre-push &&
+  touch .husky/pre-push && echo "yarn lint" > .husky/pre-push &&
   npm pkg set scripts.postinstall="husky"
 
 # Extra packages
