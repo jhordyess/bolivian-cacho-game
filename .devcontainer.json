@@ -1,6 +1,6 @@
 {
   "name": "bolivian-cacho-game",
-  "image": "jhordyess/node:18",
+  "image": "jhordyess/node:latest",
   "customizations": {
     "vscode": {
       "extensions": [
