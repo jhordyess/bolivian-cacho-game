@@ -7,13 +7,29 @@ const straightPatterns = [
   // [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
 ]
 
-export const handCalculation = dicesValue => {
-  const dicesCount = dicesValue.reduce((acc, dice) => {
-    acc[dice] = acc[dice] ? acc[dice] + 1 : 1
-    return acc
-  }, {})
+type HandCalculation = (dicesValues: number[]) => {
+  balas: number
+  tontos: number
+  trenes: number
+  cuadras: number
+  quinas: number
+  senas: number
+  escalera: number
+  full: number
+  poker: number
+  grande: number
+}
 
-  const sortedDices = dicesValue.slice().sort((a, b) => a - b)
+export const handCalculation: HandCalculation = dicesValues => {
+  const dicesCount: Record<number, number> = dicesValues.reduce(
+    (acc, dice) => {
+      acc[dice] = acc[dice] ? acc[dice] + 1 : 1
+      return acc
+    },
+    {} as Record<number, number>
+  )
+
+  const sortedDices = dicesValues.slice().sort((a, b) => a - b)
 
   const isStraight = straightPatterns.some(pattern =>
     pattern.every((value, index) => value === sortedDices[index])
@@ -25,13 +41,16 @@ export const handCalculation = dicesValue => {
 
   const isGrande = Object.values(dicesCount).includes(5)
 
-  const dicesCounts = Object.entries(dicesCount).reduce((acc, [dice, count]) => {
-    const puntuation = count * dice
-    return {
-      ...acc,
-      [dice]: puntuation
-    }
-  }, {})
+  const dicesCounts = Object.entries(dicesCount).reduce(
+    (acc, [dice, count]) => {
+      const puntuation = count * Number(dice)
+      return {
+        ...acc,
+        [dice]: puntuation
+      }
+    },
+    {} as Record<number, number>
+  )
 
   return {
     balas: dicesCounts[1] || 0,
