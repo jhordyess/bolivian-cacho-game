@@ -15,11 +15,12 @@
     "dev": "webpack serve --config webpack.config.dev.cjs",
     "build": "yarn lint && webpack --config webpack.config.prod.cjs",
     "start": "yarn build && serve -s dist -l 3000",
-    "lint": "eslint .",
     "format": "prettier --write .",
     "postinstall": "husky",
-    "check-ts": "tsc --noEmit",
-    "test": "jest"
+    "lint": "eslint .",
+    "check:ts": "tsc --noEmit",
+    "test": "jest",
+    "validate": "yarn check:ts && yarn lint && yarn test"
   },
   "packageManager": "yarn@4.5.3",
   "dependencies": {

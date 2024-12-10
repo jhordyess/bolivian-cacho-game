@@ -12,7 +12,7 @@ yarn add react react-dom
 
 # Transpiler with TypeScript
 yarn add -D typescript ts-loader @types/react @types/react-dom &&
-  npm pkg set scripts.check-ts="tsc --noEmit"
+  npm pkg set scripts.check:ts="tsc --noEmit"
 
 # Added Jest for testing
 yarn add -D jest ts-jest @types/jest &&
