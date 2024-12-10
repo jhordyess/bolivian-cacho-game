@@ -22,14 +22,14 @@ const getDice = (dice: number) => {
 }
 
 type Props = {
-  diceValue: number
+  number: number
   isLock: boolean
   isFlip: boolean
   handleLock: () => void
   handleFlip: () => void
 }
 
-const Dice: FC<Props> = ({ diceValue: number, isLock, isFlip, handleLock, handleFlip }) => {
+const Dice: FC<Props> = ({ number, isLock, isFlip, handleLock, handleFlip }) => {
   // const divRef = useRef(null)
 
   const handleMouseDown: MouseEventHandler<HTMLDivElement> = e => {
