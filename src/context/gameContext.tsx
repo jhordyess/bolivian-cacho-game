@@ -1,10 +1,16 @@
-import React, { createContext, useContext } from 'react'
+import { createContext, type ReactNode, useContext } from 'react'
 import { useMachine } from '@xstate/react'
 import machine from './machine'
+import type { EventFromLogic, SnapshotFrom } from 'xstate'
 
-const GameContext = createContext()
+type Context = {
+  state: SnapshotFrom<typeof machine>
+  send: (event: EventFromLogic<typeof machine>) => void
+}
 
-export const GameProvider = ({ children }) => {
+const GameContext = createContext<Context | null>(null)
+
+export const GameProvider = ({ children }: { children: ReactNode }) => {
   const [state, send] = useMachine(machine)
 
   return <GameContext.Provider value={{ state, send }}>{children}</GameContext.Provider>
@@ -13,7 +19,7 @@ export const GameProvider = ({ children }) => {
 export const useGame = () => {
   const context = useContext(GameContext)
 
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useGame must be used within a GameProvider')
   }
 

@@ -1,10 +1,90 @@
 import { handCalculation } from '@/utils/handCalc'
-import { assign, createMachine } from 'xstate'
+import { assign, setup } from 'xstate'
+import { Hand } from '@/enum'
 
 const maxFlips = 2
 const maxBlocks = 2
 
-const machine = createMachine({
+const machine = setup({
+  types: {
+    context: {} as {
+      board: {
+        rollCount: number
+        flipCount: number
+        blockCount: number
+        dices: { id: number; value: number; inverted: boolean; locked: boolean }[]
+      }
+      player: {
+        score: number
+        hand: Record<Hand, number>
+        options: Record<Hand, number>
+      }
+      bot: {
+        score: number
+        hand: Record<Hand, number>
+        options: Record<Hand, number>
+      }
+    },
+    events: {} as
+      | {
+          type: 'START_GAME'
+        }
+      | {
+          type: 'IS_PLAYER_TURN'
+        }
+      | {
+          type: 'IS_BOT_TURN'
+        }
+      | {
+          type: 'GAME_OVER'
+        }
+      | {
+          type: 'CANCEL'
+        }
+      | {
+          type: 'ROLL'
+        }
+      | {
+          type: 'ROLLED'
+        }
+      | {
+          type: 'BLOCK_DICE'
+          diceId: number
+        }
+      | {
+          type: 'FLIP_DICE'
+          diceId: number
+        }
+      | {
+          type: 'HAND_CHOICE'
+        }
+      | {
+          type: 'SURRENDER'
+        }
+      | {
+          type: 'HAND_CHOSEN'
+          hand: Hand
+        }
+      | {
+          type: 'END_TURN'
+        }
+      | {
+          type: 'RESTART_GAME'
+        }
+      | {
+          type: 'ROLLDICES'
+          newDices: { id: number; value: number; inverted: boolean; locked: boolean }[]
+        }
+      | {
+          type: 'ROLLDICE'
+          dices: number[]
+        }
+      | {
+          type: 'BLOCK_DICES'
+          diceIds: number[]
+        }
+  }
+}).createMachine({
   id: 'stateMachine',
   initial: 'lobby',
   context: {
@@ -75,6 +155,18 @@ const machine = createMachine({
     bot: {
       score: 0,
       hand: {
+        balas: 0,
+        tontos: 0,
+        trenes: 0,
+        cuadras: 0,
+        quinas: 0,
+        senas: 0,
+        escalera: 0,
+        full: 0,
+        poker: 0,
+        grande: 0
+      },
+      options: {
         balas: 0,
         tontos: 0,
         trenes: 0,
@@ -251,10 +343,12 @@ const machine = createMachine({
             HAND_CHOSEN: {
               actions: assign({
                 player: ({ context: { player }, event }) => ({
-                  hand: player.hand.map(hand =>
-                    hand.name === event.hand.name ? { ...hand, value: event.value } : hand
-                  ),
-                  score: player.score + event.value
+                  ...player,
+                  hand: {
+                    ...player.hand,
+                    [event.hand]: player.options[event.hand]
+                  },
+                  score: player.score + player.options[event.hand]
                 })
               })
             },
@@ -334,10 +428,12 @@ const machine = createMachine({
             HAND_CHOSEN: {
               actions: assign({
                 bot: ({ context: { bot }, event }) => ({
-                  hand: bot.hand.map(hand =>
-                    hand.name === event.hand.name ? { ...hand, value: event.value } : hand
-                  ),
-                  score: bot.score + event.value
+                  ...bot,
+                  hand: {
+                    ...bot.hand,
+                    [event.hand]: bot.options[event.hand]
+                  },
+                  score: bot.score + bot.options[event.hand]
                 })
               })
             },
