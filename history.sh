@@ -7,8 +7,12 @@ sudo npm i -g npm
 yarn add react react-dom
 
 # Transpiler with Babel
-yarn add -D @babel/core @babel/preset-env @babel/preset-react babel-loader &&
-  npm pkg set babel.presets="['@babel/preset-env','@babel/preset-react']"
+# yarn add -D @babel/core @babel/preset-env @babel/preset-react babel-loader &&
+  # npm pkg set babel.presets="['@babel/preset-env','@babel/preset-react']"
+
+# Transpiler with TypeScript
+yarn add -D typescript ts-loader @types/react @types/react-dom &&
+  npm pkg set scripts.check-ts="tsc --noEmit"
 
 # Bundler with Webpack
 yarn add -D webpack webpack-cli webpack-dev-server
