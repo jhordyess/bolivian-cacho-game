@@ -1,48 +1,6 @@
 import { type DiceSet, Hand, DiceFaces } from '@/enum'
-
-const straightPatterns = [
-  [1, 2, 3, 4, 5], //IBIDEM
-  [2, 3, 4, 5, 6], //IBIDEM
-  [1, 3, 4, 5, 6] //ORIGINAL: 3, 4, 5, 6, 1
-  // [1, 2, 4, 5, 6], //ORIGINAL: 4, 5, 6, 1, 2
-  // [1, 2, 3, 5, 6], //ORIGINAL: 5, 6, 1, 2, 3
-  // [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
-]
-
-type CountDice = (
-  dicesValues: DiceSet,
-  diceFace: DiceFaces
-) => {
-  count: number
-  score: number
-}
-
-const countDice: CountDice = (dicesValues, dice) => {
-  const count = dicesValues.filter(d => d === dice).length
-  return {
-    count,
-    score: count * dice
-  }
-}
-
-type EvaluateHandDices = (dicesValues: DiceSet) => {
-  scores: Map<DiceFaces, number>
-  counts: Map<DiceFaces, number>
-}
-
-const evaluateHandDices: EvaluateHandDices = dicesValues => {
-  const counts = new Map()
-  const scores = new Map()
-
-  Object.values(DiceFaces).forEach(diceFace => {
-    if (typeof diceFace === 'string') return
-    const { count, score } = countDice(dicesValues, diceFace)
-    counts.set(diceFace, count)
-    scores.set(diceFace, score)
-  })
-
-  return { scores, counts }
-}
+import { straightPatterns } from './patterns'
+import { evaluateHandDices } from './evaluateHandDices'
 
 const isStraight = (dicesValues: DiceSet): boolean => {
   const sortedDices = dicesValues.slice().sort((a, b) => a - b)
