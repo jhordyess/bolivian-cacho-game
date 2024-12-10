@@ -8,6 +8,7 @@ import {
   Trenes,
   Tontos
 } from '@/feature/Game/Modal/components/Dices/icons'
+import { Hand } from '@/enum'
 
 const classes = {
   icon: 'w-6 absolute top-0 left-0 m-0 border rounded-md',
@@ -21,19 +22,19 @@ const color = '#9CA3AF'
 const tableData = [
   [
     {
-      name: 'balas',
+      name: Hand.balas,
       icon: <Balas color={color} />,
       tdClassName: 'border-r border-b',
       title: 'Balas'
     },
     {
-      name: 'escalera',
+      name: Hand.escalera,
       icon: <Text txt="E" color={color} />,
       tdClassName: 'border-r border-b',
       title: 'Escalera / Straight'
     },
     {
-      name: 'cuadras',
+      name: Hand.cuadras,
       icon: <Cuadras color={color} />,
       tdClassName: 'border-b',
       title: 'Cuadras'
@@ -41,19 +42,19 @@ const tableData = [
   ],
   [
     {
-      name: 'tontos',
+      name: Hand.tontos,
       icon: <Tontos color={color} />,
       tdClassName: 'border-r border-b',
       title: 'Tontos'
     },
     {
-      name: 'full',
+      name: Hand.full,
       icon: <Text txt="F" color={color} />,
       tdClassName: 'border-r border-b',
       title: 'Full / Full House'
     },
     {
-      name: 'quinas',
+      name: Hand.quinas,
       icon: <Quinas color={color} />,
       tdClassName: 'border-b',
       title: 'Quinas'
@@ -61,19 +62,19 @@ const tableData = [
   ],
   [
     {
-      name: 'trenes',
+      name: Hand.trenes,
       icon: <Trenes color={color} />,
       tdClassName: 'border-r border-b',
       title: 'Trenes'
     },
     {
-      name: 'poker',
+      name: Hand.poker,
       icon: <Text txt="P" color={color} />,
       tdClassName: 'border-r border-b',
       title: 'Poker / Four of a kind'
     },
     {
-      name: 'senas',
+      name: Hand.senas,
       icon: <Senas color={color} />,
       tdClassName: 'border-b',
       title: 'Senas'
@@ -82,7 +83,7 @@ const tableData = [
   [
     null,
     {
-      name: 'grande',
+      name: Hand.grande,
       icon: <Text txt="G" color={color} />,
       tdClassName: 'border-r border-l',
       title: 'Grande / Five of a kind'
@@ -94,8 +95,10 @@ const tableData = [
 type Props = {
   name: string
   active: boolean
-  options: Record<string, string>
-  values: Record<string, string>
+  //TODO: Temporary "undefined"
+  options?: Record<Hand, number>
+  //TODO: Temporary "undefined"
+  values?: Record<Hand, number>
 }
 
 const ScoreChart: FC<Props> = ({ name, active, options, values }) => (
@@ -106,8 +109,9 @@ const ScoreChart: FC<Props> = ({ name, active, options, values }) => (
           <tr key={i}>
             {row.map((cell, j) => {
               if (!cell) return <td key={`${i}-${j}`} />
-
+              //TODO: Temporary "undefined"
               const value = values?.[cell.name]
+              //TODO: Temporary "undefined"
               const option = options?.[cell.name] || ''
 
               return (
