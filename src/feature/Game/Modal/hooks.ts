@@ -14,18 +14,18 @@ export const useHooks = () => {
 
   const [isRolling, setRolling] = useState(false)
 
-  const handleFlip = diceId => {
+  const handleFlip = (diceId: number) => {
     if (!state.matches('player.roll') || isRolling) return
     send({ type: 'FLIP_DICE', diceId })
   }
 
-  const handleLock = diceId => {
+  const handleLock = (diceId: number) => {
     if (!state.matches('player.roll') || isRolling) return
     send({ type: 'BLOCK_DICE', diceId })
   }
 
   //Roll dice and start the rol
-  let animation
+  let animation: number
   const roll = () => {
     const newDices = dices.map(dice => ({
       ...dice,
