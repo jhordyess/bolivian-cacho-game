@@ -1,4 +1,12 @@
-const Text = ({ txt = '', className, color = '#000' }) => (
+import { FC } from 'react'
+
+type Props = {
+  txt?: string
+  className?: string
+  color?: string
+}
+
+const Text: FC<Props> = ({ txt = '', className, color = '#000' }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className={className}>
     <text
       x="50"
