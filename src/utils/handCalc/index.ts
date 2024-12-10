@@ -19,6 +19,9 @@ const isGrande = (countsValues: number[]) => countsValues.includes(5)
 type HandCalculation = (dicesValues: number[], isFirstRoll?: boolean) => Record<Hand, number>
 
 export const handCalculation: HandCalculation = (dicesValues, isFirstRoll = false) => {
+  if (dicesValues.length !== 5) throw new Error('Invalid number of dices')
+  if (dicesValues.some(d => d < 1 || d > 6)) throw new Error('Invalid dice value')
+
   const { counts, scores } = evaluateHandDices(dicesValues)
   const countsValues = Array.from(counts.values())
 

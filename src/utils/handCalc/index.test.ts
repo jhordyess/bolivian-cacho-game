@@ -85,4 +85,19 @@ describe('handCalculation', () => {
     const result = handCalculation(dicesValues, true)
     expect(result[Hand.grande]).toBe(Infinity)
   })
+
+  it('should throw an error when the array of dices is empty', () => {
+    const dicesValues: number[] = []
+    expect(() => handCalculation(dicesValues)).toThrow('Invalid number of dices')
+  })
+
+  it('should throw an error when the array of dices has more than 5 elements', () => {
+    const dicesValues = [1, 2, 3, 4, 5, 6]
+    expect(() => handCalculation(dicesValues)).toThrow('Invalid number of dices')
+  })
+
+  it('should throw an error when the array of dices has an invalid value', () => {
+    const dicesValues = [Infinity, -3, NaN, 1e3, 0xa]
+    expect(() => handCalculation(dicesValues)).toThrow('Invalid dice value')
+  })
 })
