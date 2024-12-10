@@ -9,7 +9,7 @@ const CnameWebpackPlugin = require('cname-webpack-plugin')
 /** @type {import('webpack').Configuration} */
 module.exports = {
   entry: {
-    app: path.resolve('src', 'index.jsx')
+    app: path.resolve('src', 'index.tsx')
   },
   mode: 'production',
   output: {
@@ -17,7 +17,7 @@ module.exports = {
     filename: '[name].[contenthash].js'
   },
   resolve: {
-    extensions: ['.ts', '.tsx'],
+    extensions: ['.ts', '.tsx', '.js'],
     alias: {
       '@': path.resolve('src')
     }
