@@ -1,7 +1,7 @@
-import { DiceFaces, type DiceSet } from '@/enum'
+import { DiceFaces } from '@/enum'
 
 type CountDice = (
-  dicesValues: DiceSet,
+  dicesValues: number[],
   diceFace: DiceFaces
 ) => {
   count: number

@@ -1,7 +1,7 @@
-import { DiceFaces, type DiceSet } from '@/enum'
+import { DiceFaces } from '@/enum'
 import { countDice } from './countDice'
 
-type EvaluateHandDices = (dicesValues: DiceSet) => {
+type EvaluateHandDices = (dicesValues: number[]) => {
   scores: Map<DiceFaces, number>
   counts: Map<DiceFaces, number>
 }

@@ -10,7 +10,6 @@ export enum Hand {
   poker = 'poker',
   grande = 'grande'
 }
-export type DiceSet = [DiceFaces, DiceFaces, DiceFaces, DiceFaces, DiceFaces]
 
 export enum DiceFaces {
   balas = 1,

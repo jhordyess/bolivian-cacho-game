@@ -1,9 +1,9 @@
 import { countDice } from './countDice'
-import { DiceFaces, DiceSet } from '@/enum'
+import { DiceFaces } from '@/enum'
 
 describe('countDice', () => {
   it('should return count 0 and score 0 when no dice match the face', () => {
-    const dicesValues: DiceSet = [2, 3, 4, 5, 6]
+    const dicesValues = [2, 3, 4, 5, 6]
     const diceFace = DiceFaces.balas
     const result = countDice(dicesValues, diceFace)
     expect(result.count).toBe(0)
@@ -11,7 +11,7 @@ describe('countDice', () => {
   })
 
   it('should return correct count and score when some dice match the face', () => {
-    const dicesValues: DiceSet = [1, 2, 1, 4, 5]
+    const dicesValues = [1, 2, 1, 4, 5]
     const diceFace = DiceFaces.balas
     const result = countDice(dicesValues, diceFace)
     expect(result.count).toBe(2)
@@ -19,7 +19,7 @@ describe('countDice', () => {
   })
 
   it('should return correct count and score when all dice match the face', () => {
-    const dicesValues: DiceSet = [3, 3, 3, 3, 3]
+    const dicesValues = [3, 3, 3, 3, 3]
     const diceFace = DiceFaces.trenes
     const result = countDice(dicesValues, diceFace)
     expect(result.count).toBe(5)
@@ -27,7 +27,7 @@ describe('countDice', () => {
   })
 
   it('should return correct count and score for a single matching dice', () => {
-    const dicesValues: DiceSet = [6, 2, 3, 4, 5]
+    const dicesValues = [6, 2, 3, 4, 5]
     const diceFace = DiceFaces.senas
     const result = countDice(dicesValues, diceFace)
     expect(result.count).toBe(1)

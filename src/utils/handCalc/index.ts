@@ -1,8 +1,8 @@
-import { type DiceSet, Hand, DiceFaces } from '@/enum'
+import { Hand, DiceFaces } from '@/enum'
 import { straightPatterns } from './patterns'
 import { evaluateHandDices } from './evaluateHandDices'
 
-const isStraight = (dicesValues: DiceSet): boolean => {
+const isStraight = (dicesValues: number[]): boolean => {
   const sortedDices = dicesValues.slice().sort((a, b) => a - b)
 
   return straightPatterns.some(pattern =>
@@ -16,7 +16,7 @@ const isPoker = (countsValues: number[]) => countsValues.includes(4)
 
 const isGrande = (countsValues: number[]) => countsValues.includes(5)
 
-type HandCalculation = (dicesValues: DiceSet, isFirstRoll?: boolean) => Record<Hand, number>
+type HandCalculation = (dicesValues: number[], isFirstRoll?: boolean) => Record<Hand, number>
 
 export const handCalculation: HandCalculation = (dicesValues, isFirstRoll = false) => {
   const { counts, scores } = evaluateHandDices(dicesValues)
