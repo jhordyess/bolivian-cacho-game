@@ -18,7 +18,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "postinstall": "husky",
-    "check-ts": "tsc --noEmit"
+    "check-ts": "tsc --noEmit",
+    "test": "jest"
   },
   "packageManager": "yarn@4.5.3",
   "dependencies": {
