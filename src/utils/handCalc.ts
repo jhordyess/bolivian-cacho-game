@@ -9,18 +9,9 @@ const straightPatterns = [
   // [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
 ]
 
-const countDicesOriginal = (dicesValues: number[]): Record<number, number> =>
-  dicesValues.reduce(
-    (acc, dice) => {
-      acc[dice] = acc[dice] ? acc[dice] + 1 : 1
-      return acc
-    },
-    {} as Record<number, number>
-  )
-
 type CountDice = (
   dicesValues: DiceSet,
-  dice: DiceFaces
+  diceFace: DiceFaces
 ) => {
   count: number
   score: number
@@ -39,73 +30,50 @@ type EvaluateHandDices = (dicesValues: DiceSet) => {
   counts: Map<DiceFaces, number>
 }
 
-export const evaluateHandDices: EvaluateHandDices = dicesValues => {
-  const scores = new Map()
+const evaluateHandDices: EvaluateHandDices = dicesValues => {
   const counts = new Map()
+  const scores = new Map()
 
-  Object.values(DiceFaces).forEach(dice => {
-    if (typeof dice === 'string') return
-    const { count, score } = countDice(dicesValues, dice)
-    counts.set(dice, count)
-    scores.set(dice, score)
+  Object.values(DiceFaces).forEach(diceFace => {
+    if (typeof diceFace === 'string') return
+    const { count, score } = countDice(dicesValues, diceFace)
+    counts.set(diceFace, count)
+    scores.set(diceFace, score)
   })
 
   return { scores, counts }
 }
 
-const isStraight = (dicesValues: number[]): boolean => {
+const isStraight = (dicesValues: DiceSet): boolean => {
   const sortedDices = dicesValues.slice().sort((a, b) => a - b)
+
   return straightPatterns.some(pattern =>
     pattern.every((value, index) => value === sortedDices[index])
   )
 }
 
-const isFull = (dicesCount: Record<number, number>): boolean =>
-  Object.values(dicesCount).includes(3) && Object.values(dicesCount).includes(2)
+const isFull = (countsValues: number[]) => countsValues.includes(3) && countsValues.includes(2)
 
-const isPoker = (dicesCount: Record<number, number>): boolean =>
-  Object.values(dicesCount).includes(4)
+const isPoker = (countsValues: number[]) => countsValues.includes(4)
 
-const isGrande = (dicesCount: Record<number, number>): boolean =>
-  Object.values(dicesCount).includes(5)
+const isGrande = (countsValues: number[]) => countsValues.includes(5)
 
-const calcDicesScores = (dicesCount: Record<number, number>): Record<number, number> =>
-  Object.entries(dicesCount).reduce(
-    (acc, [dice, count]) => {
-      const puntuation = count * Number(dice)
-      return {
-        ...acc,
-        [dice]: puntuation
-      }
-    },
-    {} as Record<number, number>
-  )
-
-type HandCalculation = (dicesValues: number[], isFirstRoll?: boolean) => Record<Hand, number>
+type HandCalculation = (dicesValues: DiceSet, isFirstRoll?: boolean) => Record<Hand, number>
 
 export const handCalculation: HandCalculation = (dicesValues, isFirstRoll = false) => {
-  const dicesCount = countDicesOriginal(dicesValues)
-
-  const escalera = isStraight(dicesValues) ? (isFirstRoll ? 25 : 20) : 0
-
-  const full = isFull(dicesCount) ? (isFirstRoll ? 35 : 30) : 0
-
-  const poker = isPoker(dicesCount) ? (isFirstRoll ? 45 : 40) : 0
-
-  const grande = isGrande(dicesCount) ? (isFirstRoll ? Infinity : 50) : 0
-
-  const dicesCounts = calcDicesScores(dicesValues)
+  const { counts, scores } = evaluateHandDices(dicesValues)
+  const countsValues = Array.from(counts.values())
 
   return {
-    balas: dicesCounts[1] || 0,
-    tontos: dicesCounts[2] || 0,
-    trenes: dicesCounts[3] || 0,
-    cuadras: dicesCounts[4] || 0,
-    quinas: dicesCounts[5] || 0,
-    senas: dicesCounts[6] || 0,
-    escalera,
-    full,
-    poker,
-    grande
+    [Hand.balas]: scores.get(DiceFaces.balas) || 0,
+    [Hand.tontos]: scores.get(DiceFaces.tontos) || 0,
+    [Hand.trenes]: scores.get(DiceFaces.trenes) || 0,
+    [Hand.cuadras]: scores.get(DiceFaces.cuadras) || 0,
+    [Hand.quinas]: scores.get(DiceFaces.quinas) || 0,
+    [Hand.senas]: scores.get(DiceFaces.senas) || 0,
+    [Hand.escalera]: isStraight(dicesValues) ? (isFirstRoll ? 25 : 20) : 0,
+    [Hand.full]: isFull(countsValues) ? (isFirstRoll ? 35 : 30) : 0,
+    [Hand.poker]: isPoker(countsValues) ? (isFirstRoll ? 45 : 40) : 0,
+    [Hand.grande]: isGrande(countsValues) ? (isFirstRoll ? Infinity : 50) : 0
   }
 }
