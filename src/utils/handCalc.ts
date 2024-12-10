@@ -1,3 +1,5 @@
+import { Hand } from '@/enum'
+
 const straightPatterns = [
   [1, 2, 3, 4, 5], //IBIDEM
   [2, 3, 4, 5, 6], //IBIDEM
@@ -7,21 +9,7 @@ const straightPatterns = [
   // [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
 ]
 
-type HandCalculation = (
-  dicesValues: number[],
-  isFirstRoll?: boolean
-) => {
-  balas: number
-  tontos: number
-  trenes: number
-  cuadras: number
-  quinas: number
-  senas: number
-  escalera: number
-  full: number
-  poker: number
-  grande: number
-}
+type HandCalculation = (dicesValues: number[], isFirstRoll?: boolean) => Record<Hand, number>
 
 export const handCalculation: HandCalculation = (dicesValues, isFirstRoll = false) => {
   const dicesCount: Record<number, number> = dicesValues.reduce(
