@@ -10,3 +10,11 @@ export enum Hand {
   poker = 'poker',
   grande = 'grande'
 }
+
+export type HandDices =
+  | Hand.balas
+  | Hand.tontos
+  | Hand.trenes
+  | Hand.cuadras
+  | Hand.quinas
+  | Hand.senas
