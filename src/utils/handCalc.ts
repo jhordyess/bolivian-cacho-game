@@ -18,13 +18,15 @@ const countDicesOriginal = (dicesValues: number[]): Record<number, number> =>
     {} as Record<number, number>
   )
 
-const countDice = (
+type CountDice = (
   dicesValues: DiceSet,
   dice: DiceFaces
-): {
+) => {
   count: number
   score: number
-} => {
+}
+
+const countDice: CountDice = (dicesValues, dice) => {
   const count = dicesValues.filter(d => d === dice).length
   return {
     count,
@@ -32,9 +34,14 @@ const countDice = (
   }
 }
 
-export const evaluateHandDices = (dicesValues: DiceSet) => {
-  const scores = new Map<DiceFaces, number>()
-  const counts = new Map<DiceFaces, number>()
+type EvaluateHandDices = (dicesValues: DiceSet) => {
+  scores: Map<DiceFaces, number>
+  counts: Map<DiceFaces, number>
+}
+
+export const evaluateHandDices: EvaluateHandDices = dicesValues => {
+  const scores = new Map()
+  const counts = new Map()
 
   Object.values(DiceFaces).forEach(dice => {
     if (typeof dice === 'string') return
