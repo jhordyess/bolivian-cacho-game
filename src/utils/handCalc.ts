@@ -7,7 +7,10 @@ const straightPatterns = [
   // [1, 2, 3, 4, 6] //ORIGINAL: 6, 1, 2, 3, 4
 ]
 
-type HandCalculation = (dicesValues: number[]) => {
+type HandCalculation = (
+  dicesValues: number[],
+  isFirstRoll?: boolean
+) => {
   balas: number
   tontos: number
   trenes: number
@@ -20,7 +23,7 @@ type HandCalculation = (dicesValues: number[]) => {
   grande: number
 }
 
-export const handCalculation: HandCalculation = dicesValues => {
+export const handCalculation: HandCalculation = (dicesValues, isFirstRoll = false) => {
   const dicesCount: Record<number, number> = dicesValues.reduce(
     (acc, dice) => {
       acc[dice] = acc[dice] ? acc[dice] + 1 : 1
@@ -59,9 +62,9 @@ export const handCalculation: HandCalculation = dicesValues => {
     cuadras: dicesCounts[4] || 0,
     quinas: dicesCounts[5] || 0,
     senas: dicesCounts[6] || 0,
-    escalera: isStraight ? 20 : 0,
-    full: isFull ? 30 : 0,
-    poker: isPoker ? 40 : 0,
-    grande: isGrande ? 50 : 0
+    escalera: isStraight ? (isFirstRoll ? 25 : 20) : 0,
+    full: isFull ? (isFirstRoll ? 35 : 30) : 0,
+    poker: isPoker ? (isFirstRoll ? 45 : 40) : 0,
+    grande: isGrande ? (isFirstRoll ? Infinity : 50) : 0
   }
 }
