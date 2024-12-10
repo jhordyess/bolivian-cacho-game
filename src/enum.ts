@@ -10,11 +10,13 @@ export enum Hand {
   poker = 'poker',
   grande = 'grande'
 }
+export type DiceSet = [DiceFaces, DiceFaces, DiceFaces, DiceFaces, DiceFaces]
 
-export type HandDices =
-  | Hand.balas
-  | Hand.tontos
-  | Hand.trenes
-  | Hand.cuadras
-  | Hand.quinas
-  | Hand.senas
+export enum DiceFaces {
+  balas = 1,
+  tontos = 2,
+  trenes = 3,
+  cuadras = 4,
+  quinas = 5,
+  senas = 6
+}

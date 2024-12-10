@@ -1,4 +1,4 @@
-import { Hand, HandDices } from '@/enum'
+import { type DiceSet, Hand, DiceFaces } from '@/enum'
 
 const straightPatterns = [
   [1, 2, 3, 4, 5], //IBIDEM
@@ -18,19 +18,40 @@ const countDicesOriginal = (dicesValues: number[]): Record<number, number> =>
     {} as Record<number, number>
   )
 
-export const countDices = (dicesValues: number[]): Record<HandDices, number> => ({
-  [Hand.balas]: dicesValues.filter(dice => dice === 1).length,
-  [Hand.tontos]: dicesValues.filter(dice => dice === 2).length,
-  [Hand.trenes]: dicesValues.filter(dice => dice === 3).length,
-  [Hand.cuadras]: dicesValues.filter(dice => dice === 4).length,
-  [Hand.quinas]: dicesValues.filter(dice => dice === 5).length,
-  [Hand.senas]: dicesValues.filter(dice => dice === 6).length
-})
+const countDice = (
+  dicesValues: DiceSet,
+  dice: DiceFaces
+): {
+  count: number
+  score: number
+} => {
+  const count = dicesValues.filter(d => d === dice).length
+  return {
+    count,
+    score: count * dice
+  }
+}
 
-const sortDices = (dicesValues: number[]): number[] => dicesValues.slice().sort((a, b) => a - b)
+export const evaluateHandDices = (dicesValues: DiceSet) => {
+  const scores = new Map<DiceFaces, number>()
+  const counts = new Map<DiceFaces, number>()
 
-const isStraight = (sortedDices: number[]): boolean =>
-  straightPatterns.some(pattern => pattern.every((value, index) => value === sortedDices[index]))
+  Object.values(DiceFaces).forEach(dice => {
+    if (typeof dice === 'string') return
+    const { count, score } = countDice(dicesValues, dice)
+    counts.set(dice, count)
+    scores.set(dice, score)
+  })
+
+  return { scores, counts }
+}
+
+const isStraight = (dicesValues: number[]): boolean => {
+  const sortedDices = dicesValues.slice().sort((a, b) => a - b)
+  return straightPatterns.some(pattern =>
+    pattern.every((value, index) => value === sortedDices[index])
+  )
+}
 
 const isFull = (dicesCount: Record<number, number>): boolean =>
   Object.values(dicesCount).includes(3) && Object.values(dicesCount).includes(2)
@@ -58,9 +79,7 @@ type HandCalculation = (dicesValues: number[], isFirstRoll?: boolean) => Record<
 export const handCalculation: HandCalculation = (dicesValues, isFirstRoll = false) => {
   const dicesCount = countDicesOriginal(dicesValues)
 
-  const sortedDices = sortDices(dicesValues)
-
-  const escalera = isStraight(sortedDices) ? (isFirstRoll ? 25 : 20) : 0
+  const escalera = isStraight(dicesValues) ? (isFirstRoll ? 25 : 20) : 0
 
   const full = isFull(dicesCount) ? (isFirstRoll ? 35 : 30) : 0
 
