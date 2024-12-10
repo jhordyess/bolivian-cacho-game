@@ -1,4 +1,4 @@
-import React, { createElement } from 'react'
+import React, { createElement, FC } from 'react'
 import {
   Text,
   Quinas,
@@ -91,7 +91,14 @@ const tableData = [
   ]
 ]
 
-const ScoreChart = ({ name, active, options, values }) => (
+type Props = {
+  name: string
+  active: boolean
+  options: Record<string, string>
+  values: Record<string, string>
+}
+
+const ScoreChart: FC<Props> = ({ name, active, options, values }) => (
   <div className="w-full">
     <table className="mx-auto">
       <tbody>
