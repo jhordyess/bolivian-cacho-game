@@ -34,7 +34,7 @@ export default function Modal() {
               options={playerOptions}
               values={playerHand}
             />
-            <ScoreChart name="Player 2" />
+            <ScoreChart name="Player 2" active={false} />
           </div>
 
           <div className="flex h-full items-center justify-center border-t p-8">
