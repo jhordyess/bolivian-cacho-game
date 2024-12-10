@@ -7,7 +7,7 @@ import { useGame } from '@/context/gameContext'
 export default function Modal() {
   const { state, send } = useGame()
 
-  const isPlayerIdle = state.matches('player.idle')
+  const isPlayerIdle = state.matches({ player: 'idle' })
 
   const handleCloseGame = () => {
     send({ type: 'CANCEL' })
@@ -34,7 +34,7 @@ export default function Modal() {
               options={playerOptions}
               values={playerHand}
             />
-            <ScoreChart name="Player 2" />
+            <ScoreChart name="Player 2" active={false} />
           </div>
 
           <div className="flex h-full items-center justify-center border-t p-8">

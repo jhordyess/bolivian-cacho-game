@@ -1,10 +1,16 @@
 import { handCalculation } from '@/utils/handCalc'
-import { assign, createMachine } from 'xstate'
+import { assign, setup } from 'xstate'
+import { MachineEvents, MachineContext } from './types'
 
 const maxFlips = 2
 const maxBlocks = 2
 
-const machine = createMachine({
+const machine = setup({
+  types: {
+    context: {} as MachineContext,
+    events: {} as MachineEvents
+  }
+}).createMachine({
   id: 'stateMachine',
   initial: 'lobby',
   context: {
@@ -75,6 +81,18 @@ const machine = createMachine({
     bot: {
       score: 0,
       hand: {
+        balas: 0,
+        tontos: 0,
+        trenes: 0,
+        cuadras: 0,
+        quinas: 0,
+        senas: 0,
+        escalera: 0,
+        full: 0,
+        poker: 0,
+        grande: 0
+      },
+      options: {
         balas: 0,
         tontos: 0,
         trenes: 0,
@@ -251,10 +269,12 @@ const machine = createMachine({
             HAND_CHOSEN: {
               actions: assign({
                 player: ({ context: { player }, event }) => ({
-                  hand: player.hand.map(hand =>
-                    hand.name === event.hand.name ? { ...hand, value: event.value } : hand
-                  ),
-                  score: player.score + event.value
+                  ...player,
+                  hand: {
+                    ...player.hand,
+                    [event.hand]: player.options[event.hand]
+                  },
+                  score: player.score + player.options[event.hand]
                 })
               })
             },
@@ -334,10 +354,12 @@ const machine = createMachine({
             HAND_CHOSEN: {
               actions: assign({
                 bot: ({ context: { bot }, event }) => ({
-                  hand: bot.hand.map(hand =>
-                    hand.name === event.hand.name ? { ...hand, value: event.value } : hand
-                  ),
-                  score: bot.score + event.value
+                  ...bot,
+                  hand: {
+                    ...bot.hand,
+                    [event.hand]: bot.options[event.hand]
+                  },
+                  score: bot.score + bot.options[event.hand]
                 })
               })
             },

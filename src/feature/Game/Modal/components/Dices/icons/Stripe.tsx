@@ -1,4 +1,11 @@
-const Stripe = ({ className, color = '#000000' }) => (
+import { FC } from 'react'
+
+type Props = {
+  className?: string
+  color?: string
+}
+
+const Stripe: FC<Props> = ({ className, color = '#000000' }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className={className}>
     <defs>
       <pattern

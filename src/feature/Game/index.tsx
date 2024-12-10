@@ -19,7 +19,7 @@ export default function Game() {
       >
         Play now
       </button>
-      {!isLobby && createPortal(<Modal />, document.getElementById('modal'))}
+      {!isLobby && createPortal(<Modal />, document.getElementById('modal') as HTMLElement)}
     </div>
   )
 }

@@ -1,8 +1,8 @@
-import { useRef } from 'react'
+import { type FC, type MouseEventHandler, type ReactNode } from 'react'
 import { Quinas, Balas, Cuadras, Senas, Trenes, Tontos } from './icons'
 import Stripe from './icons/Stripe'
 
-function getDice(dice) {
+const getDice = (dice: number) => {
   switch (dice) {
     case 1:
       return <Balas />
@@ -21,10 +21,18 @@ function getDice(dice) {
   }
 }
 
-const Dice = ({ number, isLock, isFlip, handleLock, handleFlip }) => {
-  const divRef = useRef(null)
+type Props = {
+  number: number
+  isLock: boolean
+  isFlip: boolean
+  handleLock: () => void
+  handleFlip: () => void
+}
 
-  const handleMouseDown = e => {
+const Dice: FC<Props> = ({ number, isLock, isFlip, handleLock, handleFlip }) => {
+  // const divRef = useRef(null)
+
+  const handleMouseDown: MouseEventHandler<HTMLDivElement> = e => {
     const isLeftClick = e.button === 0
     const isRightClick = e.button === 2
 
@@ -38,7 +46,7 @@ const Dice = ({ number, isLock, isFlip, handleLock, handleFlip }) => {
       className={`relative h-14 w-14 cursor-pointer rounded-md p-0 hover:opacity-50 ${
         isFlip ? 'bg-blue-200' : 'bg-gray-300'
       }`}
-      ref={divRef}
+      // ref={divRef}
       onContextMenu={e => {
         e.preventDefault()
       }}
@@ -51,8 +59,8 @@ const Dice = ({ number, isLock, isFlip, handleLock, handleFlip }) => {
   )
 }
 
-const Dices = ({ children }) => {
-  return <div className="flex justify-center gap-3">{children}</div>
-}
+const Dices = ({ children }: { children: ReactNode }) => (
+  <div className="flex justify-center gap-3">{children}</div>
+)
 
 export { Dices, Dice }

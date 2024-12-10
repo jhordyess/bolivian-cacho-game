@@ -3,9 +3,7 @@ import Home from '@/pages/Home'
 import './styles.css'
 import { GameProvider } from './context/gameContext'
 
-const root = createRoot(document.getElementById('app'))
-
-root.render(
+createRoot(document.getElementById('app') as HTMLElement).render(
   // <React.StrictMode>
   <GameProvider>
     <Home />

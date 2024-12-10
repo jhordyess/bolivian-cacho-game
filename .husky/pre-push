@@ -1,2 +1,4 @@
 # .husky/pre-push
-npm run lint && (paplay "$HOME/Music/ta-bien-goku.wav" || true)
+npm run lint &&
+  npm run check-ts &&
+  (paplay "$HOME/Music/ta-bien-goku.wav" || true)
