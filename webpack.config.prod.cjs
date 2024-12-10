@@ -17,7 +17,7 @@ module.exports = {
     filename: '[name].[contenthash].js'
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx'],
     alias: {
       '@': path.resolve('src')
     }
@@ -25,9 +25,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['ts-loader']
       },
       {
         test: /\.css$/,
