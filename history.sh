@@ -8,7 +8,7 @@ yarn add react react-dom
 
 # Transpiler with Babel
 # yarn add -D @babel/core @babel/preset-env @babel/preset-react babel-loader &&
-  # npm pkg set babel.presets="['@babel/preset-env','@babel/preset-react']"
+# npm pkg set babel.presets="['@babel/preset-env','@babel/preset-react']"
 
 # Transpiler with TypeScript
 yarn add -D typescript ts-loader @types/react @types/react-dom &&
@@ -44,7 +44,7 @@ yarn add -D serve &&
 # Git hooks with Husky
 yarn add -D husky &&
   yarn husky &&
-  touch .husky/pre-push && echo "yarn lint" > .husky/pre-push &&
+  touch .husky/pre-push && echo "yarn lint" >.husky/pre-push &&
   npm pkg set scripts.postinstall="husky"
 
 # Extra packages
