@@ -7,7 +7,7 @@ import { useGame } from '@/context/gameContext'
 export default function Modal() {
   const { state, send } = useGame()
 
-  const isPlayerIdle = state.matches('player.idle')
+  const isPlayerIdle = state.matches({ player: 'idle' })
 
   const handleCloseGame = () => {
     send({ type: 'CANCEL' })
