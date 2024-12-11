@@ -10,3 +10,12 @@ export enum Hand {
   poker = 'poker',
   grande = 'grande'
 }
+
+export enum DiceFaces {
+  balas = 1,
+  tontos = 2,
+  trenes = 3,
+  cuadras = 4,
+  quinas = 5,
+  senas = 6
+}
