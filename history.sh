@@ -31,7 +31,7 @@ touch webpack.config.dev.js webpack.config.prod.js &&
   npm pkg set scripts.build="yarn lint && webpack --config webpack.config.prod.cjs"
 
 # Styling with Tailwind CSS
-yarn add -D tailwindcss postcss-loader autoprefixer &&
+yarn add -D tailwindcss postcss postcss-loader autoprefixer &&
   yarn tailwindcss init -p
 
 # Formatter with Prettier
