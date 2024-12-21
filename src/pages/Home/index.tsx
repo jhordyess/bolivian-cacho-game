@@ -1,7 +1,7 @@
 import Header from './Header'
 import Footer from './Footer'
 import Main from './Main'
-import Game from '@/feature/Game'
+import Game from './Game'
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import { handCalculation } from '@/utils/handCalc'
+import { handCalculation } from '@/helpers/handCalc'
 import { assign, setup } from 'xstate'
 import { MachineEvents, MachineContext } from './types'
 

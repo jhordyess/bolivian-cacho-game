@@ -1,14 +1,6 @@
 import React, { createElement, FC } from 'react'
-import {
-  Text,
-  Quinas,
-  Cuadras,
-  Balas,
-  Senas,
-  Trenes,
-  Tontos
-} from '@/feature/Game/Modal/components/Dices/icons'
-import { Hand } from '@/enum'
+import { Text, Quinas, Cuadras, Balas, Senas, Trenes, Tontos } from './Dices/icons'
+import { Hand } from '@/constants/enum'
 
 const classes = {
   icon: 'w-6 absolute top-0 left-0 m-0 border rounded-md',

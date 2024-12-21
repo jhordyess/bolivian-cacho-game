@@ -1,4 +1,4 @@
-import { Hand } from '@/enum'
+import { Hand } from '@/constants/enum'
 
 export type MachineContext = {
   board: {
