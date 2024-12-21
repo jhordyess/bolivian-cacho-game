@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { randomDice } from '@/helpers/randomDice'
+import { randomDice } from './helpers/randomDice'
 import { useGame } from '@/context/gameContext'
 
 const maxRolls = 2
