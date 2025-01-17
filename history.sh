@@ -29,7 +29,7 @@ yarn add -D css-minimizer-webpack-plugin terser-webpack-plugin clean-webpack-plu
 yarn add -D cname-webpack-plugin
 touch webpack.config.dev.js webpack.config.prod.js &&
   npm pkg set scripts.dev="webpack serve --config webpack.config.dev.cjs" &&
-  npm pkg set scripts.build="yarn lint && webpack --config webpack.config.prod.cjs"
+  npm pkg set scripts.build="yarn validate && webpack --config webpack.config.prod.cjs"
 
 # Styling with Tailwind CSS
 yarn add -D tailwindcss postcss postcss-loader autoprefixer &&

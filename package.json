@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "dev": "webpack serve --config webpack.config.dev.cjs",
-    "build": "yarn lint && webpack --config webpack.config.prod.cjs",
+    "build": "yarn validate && webpack --config webpack.config.prod.cjs",
     "start": "yarn build && serve -s dist -l 3000",
     "format": "prettier --write .",
     "postinstall": "husky",
