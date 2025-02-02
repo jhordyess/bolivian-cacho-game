@@ -15,11 +15,18 @@ yarn add -D typescript ts-loader @types/react @types/react-dom &&
   npm pkg set scripts.check:ts="tsc --noEmit" &&
   yarn tsc --init
 
-# Added Jest for testing
+# Added Jest for testing, with support for TypeScript
 yarn add -D jest ts-jest @types/jest &&
   yarn ts-jest config:init &&
   mv jest.config.js jest.config.cjs &&
   npm pkg set scripts.test="jest"
+
+# Added React Testing Library
+yarn add -D @testing-library/dom \
+	@testing-library/react \
+	@testing-library/jest-dom \
+	jest-environment-jsdom && \
+  touch jest.setup.ts
 
 # Bundler with Webpack
 yarn add -D webpack webpack-cli webpack-dev-server
