@@ -179,14 +179,22 @@ const machine = setup({
         },
         rolling: {
           on: {
-            ROLLED: {
-              target: 'choosing',
+            // Evento to update the dices with animation frames
+            NEW_DICES: {
               actions: assign({
                 board: ({ context: { board }, event }) => ({
                   ...board,
-                  rollCount: board.rollCount + 1,
-                  flipCount: 0,
                   dices: event.newDices
+                })
+              })
+            },
+            ROLLED: {
+              target: 'choosing',
+              actions: assign({
+                board: ({ context: { board } }) => ({
+                  ...board,
+                  rollCount: board.rollCount + 1,
+                  flipCount: 0
                 }),
                 player: ({ context: { player, board } }) => ({
                   ...player,

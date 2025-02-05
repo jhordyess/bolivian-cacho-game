@@ -39,8 +39,11 @@ export type MachineEvents =
       type: 'ROLL'
     }
   | {
-      type: 'ROLLED'
+      type: 'NEW_DICES'
       newDices: { id: number; value: number; inverted: boolean; locked: boolean }[]
+    }
+  | {
+      type: 'ROLLED'
     }
   | {
       type: 'SURRENDER'
