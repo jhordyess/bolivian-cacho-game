@@ -12,13 +12,21 @@ yarn add react react-dom
 
 # Transpiler with TypeScript
 yarn add -D typescript ts-loader @types/react @types/react-dom &&
-  npm pkg set scripts.check:ts="tsc --noEmit"
+  npm pkg set scripts.check:ts="tsc --noEmit" &&
+  yarn tsc --init
 
-# Added Jest for testing
+# Added Jest for testing, with support for TypeScript
 yarn add -D jest ts-jest @types/jest &&
   yarn ts-jest config:init &&
   mv jest.config.js jest.config.cjs &&
   npm pkg set scripts.test="jest"
+
+# Added React Testing Library
+yarn add -D @testing-library/dom \
+	@testing-library/react \
+	@testing-library/jest-dom \
+	jest-environment-jsdom && \
+  touch jest.setup.ts
 
 # Bundler with Webpack
 yarn add -D webpack webpack-cli webpack-dev-server
@@ -28,10 +36,10 @@ yarn add -D css-minimizer-webpack-plugin terser-webpack-plugin clean-webpack-plu
 yarn add -D cname-webpack-plugin
 touch webpack.config.dev.js webpack.config.prod.js &&
   npm pkg set scripts.dev="webpack serve --config webpack.config.dev.cjs" &&
-  npm pkg set scripts.build="yarn lint && webpack --config webpack.config.prod.cjs"
+  npm pkg set scripts.build="yarn validate && webpack --config webpack.config.prod.cjs"
 
 # Styling with Tailwind CSS
-yarn add -D tailwindcss postcss-loader autoprefixer &&
+yarn add -D tailwindcss postcss postcss-loader autoprefixer &&
   yarn tailwindcss init -p
 
 # Formatter with Prettier
@@ -50,7 +58,7 @@ yarn add -D serve &&
 # Git hooks with Husky
 yarn add -D husky &&
   yarn husky &&
-  touch .husky/pre-push && echo "yarn lint" >.husky/pre-push &&
+  touch .husky/pre-push && echo "yarn validate" >.husky/pre-push &&
   npm pkg set scripts.postinstall="husky"
 
 # Extra packages

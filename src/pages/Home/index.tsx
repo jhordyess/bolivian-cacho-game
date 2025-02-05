@@ -1,7 +1,7 @@
 import Header from './Header'
 import Footer from './Footer'
 import Main from './Main'
-import Game from '@/feature/Game'
+import Game from './Game'
 
 export default function Home() {
   return (
@@ -38,27 +38,7 @@ export default function Home() {
         </section>
       </Main>
 
-      <Footer>
-        Made with 💪 by&nbsp;
-        <a
-          className="text-blue-600 hover:text-blue-400"
-          href="https://www.jhordyess.com"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Jhordyess
-        </a>
-        <br />
-        👉&nbsp;
-        <a
-          href="https://github.com/jhordyess/bolivian-cacho-game"
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-600 hover:text-blue-400"
-        >
-          View on GitHub
-        </a>
-      </Footer>
+      <Footer />
     </div>
   )
 }

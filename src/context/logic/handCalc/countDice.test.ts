@@ -1,5 +1,5 @@
 import { countDice } from './countDice'
-import { DiceFaces } from '@/enum'
+import { DiceFaces } from '@/constants/enum'
 
 describe('countDice', () => {
   it('should return count 0 and score 0 when no dice match the face', () => {

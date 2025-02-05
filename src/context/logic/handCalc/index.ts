@@ -1,4 +1,4 @@
-import { Hand, DiceFaces } from '@/enum'
+import { Hand, DiceFaces } from '@/constants/enum'
 import { straightPatterns } from './patterns'
 import { evaluateHandDices } from './evaluateHandDices'
 

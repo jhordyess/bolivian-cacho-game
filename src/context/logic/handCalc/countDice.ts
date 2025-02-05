@@ -1,4 +1,4 @@
-import { DiceFaces } from '@/enum'
+import { DiceFaces } from '@/constants/enum'
 
 type CountDice = (
   dicesValues: number[],

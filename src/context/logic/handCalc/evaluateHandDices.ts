@@ -1,4 +1,4 @@
-import { DiceFaces } from '@/enum'
+import { DiceFaces } from '@/constants/enum'
 import { countDice } from './countDice'
 
 type EvaluateHandDices = (dicesValues: number[]) => {

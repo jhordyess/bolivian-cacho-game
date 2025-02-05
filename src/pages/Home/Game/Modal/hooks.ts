@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { randomDice } from '@/utils/randomDice'
+import { randomDice } from './helpers/randomDice'
 import { useGame } from '@/context/gameContext'
 
 const maxRolls = 2
@@ -15,34 +15,37 @@ export const useHooks = () => {
   const [isRolling, setRolling] = useState(false)
 
   const handleFlip = (diceId: number) => {
-    if (!state.matches({ player: 'roll' }) || isRolling) return
+    if (!state.matches({ player: 'choosing' }) || isRolling) return
     send({ type: 'FLIP_DICE', diceId })
   }
 
   const handleLock = (diceId: number) => {
-    if (!state.matches({ player: 'roll' }) || isRolling) return
+    if (!state.matches({ player: 'choosing' }) || isRolling) return
     send({ type: 'BLOCK_DICE', diceId })
   }
 
-  //Roll dice and start the rol
+  //Update dices while rolling
   let animation: number
-  const roll = () => {
+
+  const executeDiceRoll = () => {
     const newDices = dices.map(dice => ({
       ...dice,
       value: dice.locked ? dice.value : randomDice(),
       inverted: false
     }))
 
-    send({ type: 'ROLLDICES', newDices })
-    animation = window.requestAnimationFrame(roll)
+    send({ type: 'NEW_DICES', newDices })
+    animation = window.requestAnimationFrame(executeDiceRoll)
   }
 
   const rollDices = () => {
-    if (!state.matches({ player: 'roll' })) send({ type: 'ROLL' })
+    if (state.matches({ player: 'idle' }) || state.matches({ player: 'choosing' }))
+      send({ type: 'ROLL' })
 
     if (rollCount < maxRolls) {
       setRolling(true)
-      animation = window.requestAnimationFrame(roll)
+      animation = window.requestAnimationFrame(executeDiceRoll)
+
       setTimeout(() => {
         window.cancelAnimationFrame(animation)
         setRolling(false)

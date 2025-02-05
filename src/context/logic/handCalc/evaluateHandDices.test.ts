@@ -1,5 +1,5 @@
 import { evaluateHandDices } from './evaluateHandDices'
-import { DiceFaces } from '@/enum'
+import { DiceFaces } from '@/constants/enum'
 
 describe('evaluate Hand Dices', () => {
   it('should evaluate a hand with 2 balas, 1 tonto, 1 tren and 1 cuadra', () => {

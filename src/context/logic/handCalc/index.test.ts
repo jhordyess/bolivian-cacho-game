@@ -1,5 +1,5 @@
 import { handCalculation } from './index'
-import { Hand } from '@/enum'
+import { Hand } from '@/constants/enum'
 
 describe('handCalculation', () => {
   it('should calculate correct scores for balas', () => {
