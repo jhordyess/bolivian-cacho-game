@@ -179,7 +179,7 @@ const machine = setup({
         },
         rolling: {
           on: {
-            // Evento to update the dices with animation frames
+            // Event to update the dices with animation frames
             NEW_DICES: {
               actions: assign({
                 board: ({ context: { board }, event }) => ({
@@ -270,14 +270,12 @@ const machine = setup({
                 })
               })
             },
-
             SURRENDER: '#stateMachine.playing',
             CANCEL: '#stateMachine.lobby'
           }
         }
       }
-    }
-    /*
+    },
     bot: {
       initial: 'idle',
       states: {
@@ -290,61 +288,127 @@ const machine = setup({
             board: ({ context: { board } }) => ({
               ...board,
               rollCount: 0,
+              flipCount: 0,
+              blockCount: 0,
               dices: board.dices.map(dice => ({
                 ...dice,
                 value: 0,
                 locked: false,
                 inverted: false
               }))
+            }),
+            bot: ({ context: { bot } }) => ({
+              ...bot,
+              score: 0,
+              hand: {
+                balas: 0,
+                tontos: 0,
+                trenes: 0,
+                cuadras: 0,
+                quinas: 0,
+                senas: 0,
+                escalera: 0,
+                full: 0,
+                poker: 0,
+                grande: 0
+              },
+              options: {
+                balas: 0,
+                tontos: 0,
+                trenes: 0,
+                cuadras: 0,
+                quinas: 0,
+                senas: 0,
+                escalera: 0,
+                full: 0,
+                poker: 0,
+                grande: 0
+              }
             })
           })
         },
-        roll: {
+        rolling: {
           on: {
-            ROLLDICE: {
+            // Event to update the dices with animation frames
+            NEW_DICES: {
               actions: assign({
                 board: ({ context: { board }, event }) => ({
                   ...board,
-                  dices: board.dices.map(dice =>
-                    dice.locked ? dice : { ...dice, value: event.dices[dice.id - 1] }
-                  )
+                  dices: event.newDices
                 })
               })
             },
             ROLLED: {
+              target: 'choosing',
               actions: assign({
                 board: ({ context: { board } }) => ({
                   ...board,
-                  rollCount: board.rollCount + 1
+                  rollCount: board.rollCount + 1,
+                  flipCount: 0
+                }),
+                bot: ({ context: { bot, board } }) => ({
+                  ...bot,
+                  options: handCalculation(board.dices.map(dice => dice.value))
                 })
               })
             },
-            BLOCK_DICES: {
+            SURRENDER: '#stateMachine.playing',
+            CANCEL: '#stateMachine.lobby'
+          }
+        },
+        choosing: {
+          on: {
+            ROLL: {
+              target: 'rolling',
+              guard: ({ context: { board } }) => board.rollCount < maxRolls
+            },
+            BLOCK_DICE: {
               actions: assign({
                 board: ({ context: { board }, event }) => ({
                   ...board,
-                  ...(board.rollCount === 1 && {
-                    dices: board.dices.map(dice =>
-                      event.diceIds.includes(dice.id) ? { ...dice, locked: true } : dice
-                    )
-                  })
+                  ...(board.rollCount === 1 &&
+                    board.blockCount < maxBlocks &&
+                    board.dices[event.diceId - 1].locked === false && {
+                      dices: board.dices.map(dice =>
+                        dice.id === event.diceId ? { ...dice, locked: true } : dice
+                      ),
+                      blockCount: board.blockCount + 1
+                    })
                 })
               })
             },
-            HAND_CHOICE: 'handChoice',
-            SURRENDER: '#stateMachine.playing',
-            CANCEL: '#stateMachine.lobby'
-          },
-          entry: assign({
-            board: ({ context: { board } }) => ({
-              ...board,
-              rollCount: board.rollCount + 1
-            })
-          })
-        },
-        handChoice: {
-          on: {
-            HAND_CHOSEN: {
+            FLIP_DICE: {
+              actions: [
+                assign({
+                  board: ({ context: { board }, event }) => ({
+                    ...board,
+                    ...(board.dices[event.diceId - 1].inverted
+                      ? {
+                          flipCount: board.flipCount - 1,
+                          dices: board.dices.map(dice =>
+                            dice.id === event.diceId ? { ...dice, inverted: false } : dice
+                          )
+                        }
+                      : board.flipCount < maxFlips && {
+                          flipCount: board.flipCount + 1,
+                          dices: board.dices.map(dice =>
+                            dice.id === event.diceId ? { ...dice, inverted: true } : dice
+                          )
+                        })
+                  })
+                }),
+                assign({
+                  bot: ({ context: { bot, board } }) => ({
+                    ...bot,
+                    options: handCalculation(
+                      board.dices.map(dice => (dice.inverted ? 7 - dice.value : dice.value))
+                    )
+                  })
+                })
+              ]
+            },
+            END_TURN: {
+              target: '#stateMachine.playing',
               actions: assign({
                 bot: ({ context: { bot }, event }) => ({
                   ...bot,
@@ -356,13 +420,12 @@ const machine = setup({
                 })
               })
             },
-            END_TURN: '#stateMachine.playing',
             SURRENDER: '#stateMachine.playing',
             CANCEL: '#stateMachine.lobby'
           }
         }
       }
-    }*/
+    }
   }
 })
 
