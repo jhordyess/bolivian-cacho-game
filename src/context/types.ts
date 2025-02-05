@@ -40,6 +40,10 @@ export type MachineEvents =
     }
   | {
       type: 'ROLLED'
+      newDices: { id: number; value: number; inverted: boolean; locked: boolean }[]
+    }
+  | {
+      type: 'SURRENDER'
     }
   | {
       type: 'BLOCK_DICE'
@@ -50,30 +54,9 @@ export type MachineEvents =
       diceId: number
     }
   | {
-      type: 'HAND_CHOICE'
-    }
-  | {
-      type: 'SURRENDER'
-    }
-  | {
-      type: 'HAND_CHOSEN'
+      type: 'END_TURN'
       hand: Hand
     }
   | {
-      type: 'END_TURN'
-    }
-  | {
       type: 'RESTART_GAME'
-    }
-  | {
-      type: 'ROLLDICES'
-      newDices: { id: number; value: number; inverted: boolean; locked: boolean }[]
-    }
-  | {
-      type: 'ROLLDICE'
-      dices: number[]
-    }
-  | {
-      type: 'BLOCK_DICES'
-      diceIds: number[]
     }

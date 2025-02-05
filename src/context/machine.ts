@@ -4,6 +4,7 @@ import { MachineEvents, MachineContext } from './types'
 
 const maxFlips = 2
 const maxBlocks = 2
+const maxRolls = 2
 
 const machine = setup({
   types: {
@@ -130,7 +131,7 @@ const machine = setup({
       states: {
         idle: {
           on: {
-            ROLL: 'roll', //another name?,
+            ROLL: 'rolling',
             CANCEL: '#stateMachine.lobby'
           },
           entry: assign({
@@ -176,43 +177,32 @@ const machine = setup({
             })
           })
         },
-        roll: {
+        rolling: {
           on: {
-            ROLLDICES: {
+            ROLLED: {
+              target: 'choosing',
               actions: assign({
                 board: ({ context: { board }, event }) => ({
                   ...board,
-                  dices: event.newDices
-                }),
-                player: ({ context: { player } }) => ({
-                  ...player,
-                  options: {
-                    balas: 0,
-                    tontos: 0,
-                    trenes: 0,
-                    cuadras: 0,
-                    quinas: 0,
-                    senas: 0,
-                    escalera: 0,
-                    full: 0,
-                    poker: 0,
-                    grande: 0
-                  }
-                })
-              })
-            },
-            ROLLED: {
-              actions: assign({
-                board: ({ context: { board } }) => ({
-                  ...board,
                   rollCount: board.rollCount + 1,
-                  flipCount: 0
+                  flipCount: 0,
+                  dices: event.newDices
                 }),
                 player: ({ context: { player, board } }) => ({
                   ...player,
                   options: handCalculation(board.dices.map(dice => dice.value))
                 })
               })
+            },
+            SURRENDER: '#stateMachine.playing',
+            CANCEL: '#stateMachine.lobby'
+          }
+        },
+        choosing: {
+          on: {
+            ROLL: {
+              target: 'rolling',
+              guard: ({ context: { board } }) => board.rollCount < maxRolls
             },
             BLOCK_DICE: {
               actions: assign({
@@ -259,14 +249,8 @@ const machine = setup({
                 })
               ]
             },
-            HAND_CHOICE: 'handChoice',
-            SURRENDER: '#stateMachine.playing',
-            CANCEL: '#stateMachine.lobby'
-          }
-        },
-        handChoice: {
-          on: {
-            HAND_CHOSEN: {
+            END_TURN: {
+              target: '#stateMachine.playing',
               actions: assign({
                 player: ({ context: { player }, event }) => ({
                   ...player,
@@ -278,19 +262,20 @@ const machine = setup({
                 })
               })
             },
-            END_TURN: '#stateMachine.playing',
+
             SURRENDER: '#stateMachine.playing',
             CANCEL: '#stateMachine.lobby'
           }
         }
       }
-    },
+    }
+    /*
     bot: {
       initial: 'idle',
       states: {
         idle: {
           on: {
-            ROLL: 'roll',
+            ROLL: 'rolling',
             CANCEL: '#stateMachine.lobby'
           },
           entry: assign({
@@ -369,7 +354,7 @@ const machine = setup({
           }
         }
       }
-    }
+    }*/
   }
 })
 
