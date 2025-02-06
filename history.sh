@@ -39,8 +39,8 @@ touch webpack.config.dev.js webpack.config.prod.js &&
   npm pkg set scripts.build="yarn validate && webpack --config webpack.config.prod.cjs"
 
 # Styling with Tailwind CSS
-yarn add -D tailwindcss postcss postcss-loader autoprefixer &&
-  yarn tailwindcss init -p
+yarn add -D tailwindcss @tailwindcss/postcss postcss postcss-loader &&
+  touch postcss.config.js
 
 # Formatter with Prettier
 yarn add -D prettier prettier-plugin-tailwindcss &&
