@@ -22,7 +22,7 @@
     "test": "jest",
     "validate": "yarn check:ts && yarn lint && yarn test"
   },
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.9.1",
   "dependencies": {
     "@xstate/react": "^5.0.2",
     "lodash": "^4.17.21",
