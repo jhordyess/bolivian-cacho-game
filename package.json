@@ -1,7 +1,7 @@
 {
   "name": "bolivian-cacho-game",
   "description": "React project for practicing the Bolivian dice game Cacho",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Jhordy Gavinchu <dev@jhordyess.com>",
   "license": "MIT",
   "private": true,
